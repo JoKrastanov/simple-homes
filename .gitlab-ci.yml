@@ -5,9 +5,11 @@ stages:
 build:
   stage: build
   script:
+    - cd Simple_Homes
     - ./gradlew build -x test
 
 test:
   stage: test
   script:
+    - cd Simple_Homes
     - ./gradlew test 
