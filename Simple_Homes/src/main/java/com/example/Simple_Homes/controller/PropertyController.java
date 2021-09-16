@@ -47,7 +47,7 @@ public class PropertyController {
         else {return ResponseEntity.notFound().build();}
     }
 
-    @DeleteMapping
+    @DeleteMapping("{id}")
     public ResponseEntity deleteProperty(@PathVariable int id) {
         testData.removeProperty(id);
         return  ResponseEntity.ok().build();

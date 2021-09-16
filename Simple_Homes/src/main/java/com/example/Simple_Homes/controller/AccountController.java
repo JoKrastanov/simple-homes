@@ -46,7 +46,7 @@ public class AccountController {
         else {return ResponseEntity.notFound().build();}
     }
 
-    @DeleteMapping
+    @DeleteMapping("{id}")
     public ResponseEntity deleteAccount(@PathVariable int id) {
         testData.removeAccount(id);
         return  ResponseEntity.ok().build();
