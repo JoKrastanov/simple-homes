@@ -78,7 +78,7 @@ public class AccountController {
 
     @PutMapping("{id}")
     public ResponseEntity<Account> updateAccount(@PathVariable("id") int id, @RequestParam("name") String name, @RequestParam("email") String email, @RequestParam("phoneNumber") String phoneNumber){
-        Account account =testData.getAccount(id);
+        Account account = testData.getAccount(id);
         if (account == null)
         {
             return new ResponseEntity("Account ID is invalid", HttpStatus.NOT_FOUND);
