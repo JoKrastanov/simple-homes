@@ -1,4 +1,4 @@
-package com.example.Simple_Homes.intefaces;
+package com.example.Simple_Homes.intefaces.AccountInterfaces;
 
 import com.example.Simple_Homes.classes.Account;
 import com.example.Simple_Homes.managers.AccountManager;

@@ -1,62 +1,58 @@
 package com.example.Simple_Homes.controller;
 
-import com.example.Simple_Homes.classes.*;
-import  com .example.Simple_Homes.repository.*;
+import com.example.Simple_Homes.classes.Property;
+import com.example.Simple_Homes.intefaces.PropertyInterfaces.IPropertyDatabase;
+import com.example.Simple_Homes.intefaces.PropertyInterfaces.IPropertyManager;
+import  com .example.Simple_Homes.repository.TestDataProperties;
 
-import com.fasterxml.jackson.databind.annotation.JsonAppend;
-import org.apache.catalina.valves.StuckThreadDetectionValve;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.xml.ws.Response;
 import java.net.URI;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/properties")
 
 public class PropertyController {
-    public static final TestData testData = new TestData();
+    private IPropertyManager CONTROLLER_MANAGER;
 
-    @GetMapping("/hello")
-    @ResponseBody
-    public String Hello()
-    {
-        String msg = "Welcome to the application";
-        return msg;
-    }
+    public PropertyController(IPropertyManager propertyManager) {CONTROLLER_MANAGER = propertyManager;}
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("{id}")
     public ResponseEntity<Property> getPropertyPath(@PathVariable(value = "id") int id)
     {
-        Property property = testData.getProperty(id);
+        Property property = (Property)CONTROLLER_MANAGER.getPropery(id);
 
         if(property != null)
         {return ResponseEntity.ok().body(property);}
         else {return ResponseEntity.notFound().build();}
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping
     public ResponseEntity<List<Property>> getAllProperties() {
-        List<Property> properties = testData.getProperties();
+        List<Property> properties = (List<Property>) CONTROLLER_MANAGER.getProperties();
         if (properties != null)
         {return ResponseEntity.ok().body(properties);}
         else {return ResponseEntity.notFound().build();}
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @DeleteMapping("{id}")
     public ResponseEntity deleteProperty(@PathVariable int id) {
-        testData.removeProperty(id);
+        CONTROLLER_MANAGER.removeProperty(id);
         return  ResponseEntity.ok().build();
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping
     public ResponseEntity<Property> createProperty(@RequestBody Property property)
     {
-        if(!testData.addProperty(property))
+        if(!CONTROLLER_MANAGER.addProperty(property))
         {
             String answer = "Property with ID " + property.getId() + " already exists!";
             return new ResponseEntity(answer, HttpStatus.CONFLICT);
@@ -68,19 +64,21 @@ public class PropertyController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @PutMapping()
     public ResponseEntity<Property> updateProperty(@RequestBody Property property)
     {
-        if(testData.updateProperty(property)) {
+        if(CONTROLLER_MANAGER.updateProperty(property)) {
             return ResponseEntity.noContent().build();
         }
         else {return new ResponseEntity("Please provide a valid id.", HttpStatus.NOT_FOUND);}
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @PutMapping("{id}")
     public ResponseEntity<Property> updateProperty(@PathVariable("id") int id, @RequestParam("type") String type, @RequestParam("price") double price, @RequestParam("address") String address, @RequestParam("postalCode") String postalCode, @RequestParam("city") String city, @RequestParam("size") int size, @RequestParam("DateAvailable") Date dateAvailable, @RequestParam("Availability") boolean available)
     {
-        Property property = testData.getProperty(id);
+        Property property = (Property)CONTROLLER_MANAGER.getPropery(id);
         if (property == null)
         {return new ResponseEntity("Property ID is invalid", HttpStatus.NOT_FOUND);}
         else {

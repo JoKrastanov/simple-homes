@@ -10,17 +10,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AccountTest {
 
-    private int DEFAULT_ID = 20;
     private String DEFAULT_NAME = "John Smith";
     private String DEFAULT_EMAIL = "johnsmith@gmail.com";
     private String DEFAULT_PHONE = "+31012345678";
+    private String DEFAULT_PASSWORD = "password";
 
     @Test
     public void AccountCreationSuccessfulTest()
     {
-        Account account = new Account(DEFAULT_ID, DEFAULT_NAME, DEFAULT_EMAIL, DEFAULT_PHONE);
+        Account account = new Account(DEFAULT_NAME, DEFAULT_EMAIL, DEFAULT_PHONE, DEFAULT_PASSWORD);
 
-        assertEquals(DEFAULT_ID,account.getId());
+
         assertEquals(DEFAULT_NAME, account.getName());
         assertEquals(DEFAULT_EMAIL, account.getEmail());
         assertEquals(DEFAULT_PHONE, account.getPhoneNumber());
