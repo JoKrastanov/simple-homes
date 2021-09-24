@@ -25,7 +25,7 @@ public class PropertyController {
     @GetMapping("{id}")
     public ResponseEntity<Property> getPropertyPath(@PathVariable(value = "id") int id)
     {
-        Property property = (Property)CONTROLLER_MANAGER.getPropery(id);
+        Property property = (Property)CONTROLLER_MANAGER.getProperty(id);
 
         if(property != null)
         {return ResponseEntity.ok().body(property);}
@@ -78,7 +78,7 @@ public class PropertyController {
     @PutMapping("{id}")
     public ResponseEntity<Property> updateProperty(@PathVariable("id") int id, @RequestParam("type") String type, @RequestParam("price") double price, @RequestParam("address") String address, @RequestParam("postalCode") String postalCode, @RequestParam("city") String city, @RequestParam("size") int size, @RequestParam("DateAvailable") Date dateAvailable, @RequestParam("Availability") boolean available)
     {
-        Property property = (Property)CONTROLLER_MANAGER.getPropery(id);
+        Property property = (Property)CONTROLLER_MANAGER.getProperty(id);
         if (property == null)
         {return new ResponseEntity("Property ID is invalid", HttpStatus.NOT_FOUND);}
         else {

@@ -4,9 +4,11 @@ import com.example.Simple_Homes.classes.Account;
 import com.example.Simple_Homes.classes.Property;
 import com.example.Simple_Homes.intefaces.AccountInterfaces.IAccountDatabase;
 import com.example.Simple_Homes.intefaces.PropertyInterfaces.IPropertyDatabase;
+import org.springframework.stereotype.Component;
 
 import java.util.*;
 
+@Component
 public class TestDataProperties implements IPropertyDatabase {
 
     private static final List<Property> propertyList = new ArrayList<>();

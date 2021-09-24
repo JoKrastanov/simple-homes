@@ -3,10 +3,12 @@ package com.example.Simple_Homes.repository;
 import com.example.Simple_Homes.classes.Account;
 
 import com.example.Simple_Homes.intefaces.AccountInterfaces.IAccountDatabase;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class TestDataAccounts implements IAccountDatabase {
 
     private final List<Account> accountList = new ArrayList<>();

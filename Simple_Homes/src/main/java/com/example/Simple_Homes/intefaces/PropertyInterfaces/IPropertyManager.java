@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface IPropertyManager {
     public List<Property> getProperties();
-    Property getPropery(int id);
+    Property getProperty(int id);
     public boolean removeProperty(int id);
     public boolean addProperty(Property property);
     public boolean updateProperty(Property property);
