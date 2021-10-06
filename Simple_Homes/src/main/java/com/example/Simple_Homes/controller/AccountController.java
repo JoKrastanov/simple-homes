@@ -1,7 +1,8 @@
 package com.example.Simple_Homes.controller;
 
+import com.example.Simple_Homes.LogInForm;
 import com.example.Simple_Homes.classes.Account;
-import com.example.Simple_Homes.intefaces.AccountInterfaces.IAccountManager;
+import com.example.Simple_Homes.intefaces.AccountInterfaces.IAccountService;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,9 +18,9 @@ import java.util.List;
 @RequestMapping("/accounts")
 public class AccountController {
 
-    private IAccountManager ACCOUNT_MANAGER;
+    private IAccountService ACCOUNT_MANAGER;
 
-    public AccountController(IAccountManager accountManager)
+    public AccountController(IAccountService accountManager)
     {
         ACCOUNT_MANAGER = accountManager;
     }
@@ -79,7 +80,7 @@ public class AccountController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PutMapping("{id}")
-    public ResponseEntity<Account> updateAccount(@PathVariable("id") int id, @RequestParam("name") String name, @RequestParam("email") String email, @RequestParam("phoneNumber") String phoneNumber){
+    public ResponseEntity<Account> updateAccount(@PathVariable("id") int id, @RequestParam("name") String name, @RequestParam("email") String email, @RequestParam("phoneNumber") String phoneNumber, @RequestParam("password") String password){
         Account account = (Account) ACCOUNT_MANAGER.getAccount(id);
         if (account == null)
         {
@@ -90,8 +91,18 @@ public class AccountController {
             account.setName(name);
             account.setEmail(email);
             account.setPhoneNumber(phoneNumber);
+            account.setPassword(password);
 
             return ResponseEntity.noContent().build();
         }
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000/")
+    @PostMapping(path = "/login")
+    public ResponseEntity<Account> logIn(@RequestBody LogInForm logInForm) {
+        Account acc = ACCOUNT_MANAGER.logInAccount(logInForm.getEmail(), logInForm.getPassword());
+
+        if (acc != null) {return ResponseEntity.ok().body(acc);}
+        return  ResponseEntity.notFound().build();
     }
 }

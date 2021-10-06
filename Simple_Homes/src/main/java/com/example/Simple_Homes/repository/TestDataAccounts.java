@@ -55,15 +55,26 @@ public class TestDataAccounts implements IAccountDatabase {
     }
 
     @Override
-    public boolean upadteAccount(Account acc) {
+    public boolean updateAccount(Account acc) {
             for (Account account : accountList) {
                 if (account.getId() == acc.getId()) {
                     account.setName(acc.getName());
                     account.setEmail(acc.getEmail());
                     account.setPhoneNumber(acc.getPhoneNumber());
+                    account.setPassword(acc.getPassword());
                     return true;
                 }
             }
         return false;
+    }
+
+    @Override
+    public Account logIn(String email, String password) {
+        for (Account account : accountList) {
+            if(account.getEmail().equals(email) && account.getPassword().equals(password)) {
+                return account;
+            }
+        }
+        return null;
     }
 }

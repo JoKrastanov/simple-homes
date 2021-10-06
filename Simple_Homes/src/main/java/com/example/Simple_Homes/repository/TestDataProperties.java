@@ -2,7 +2,6 @@ package com.example.Simple_Homes.repository;
 
 import com.example.Simple_Homes.classes.Account;
 import com.example.Simple_Homes.classes.Property;
-import com.example.Simple_Homes.intefaces.AccountInterfaces.IAccountDatabase;
 import com.example.Simple_Homes.intefaces.PropertyInterfaces.IPropertyDatabase;
 import org.springframework.stereotype.Component;
 
@@ -15,8 +14,13 @@ public class TestDataProperties implements IPropertyDatabase {
 
     public TestDataProperties() {
         Date testDate = new Date(2021, Calendar.JULY, 19);
-        propertyList.add(new Property(1, "Room", 400, new Account("Test User 4", "tu4@gmail.com", "+31874052359", "password"), "Heezerweg 186", "5614HJ", "Eindhoven", 12, testDate));
-        propertyList.add(new Property(2, "Room", 450, new Account("Test User 4", "tu4@gmail.com", "+31874052359", "password"), "Heezerweg 155", "5614JD", "Eindhoven", 12, testDate));
+        propertyList.add(new Property("Room", 400, new Account("Test User 4", "tu4@gmail.com", "+31874052359", "password"), "Heezerweg 186", "5614HJ", "Eindhoven", 12, testDate, "Come see it", false, 1, "Furnished"));
+        propertyList.add(new Property("House", 1450, new Account("Test User 4", "tu4@gmail.com", "+31874052359", "password"), "Heezerweg 155", "5614JD", "Eindhoven", 80, testDate, "description", false, 4, "Upholstered"));
+        propertyList.add(new Property("Room", 400, new Account("Test User 4", "tu4@gmail.com", "+31874052359", "password"), "Heezerweg 186", "5614HJ", "Eindhoven", 12, testDate, "Come see it", false, 1, "Furnished"));
+        propertyList.add(new Property("Room", 400, new Account("Test User 4", "tu4@gmail.com", "+31874052359", "password"), "Heezerweg 186", "5614HJ", "Eindhoven", 12, testDate, "Come see it", false, 1, "Furnished"));
+        propertyList.add(new Property("Room", 400, new Account("Test User 4", "tu4@gmail.com", "+31874052359", "password"), "Heezerweg 186", "5614HJ", "Eindhoven", 12, testDate, "Come see it", false, 1, "Furnished"));
+        propertyList.add(new Property("Room", 400, new Account("Test User 4", "tu4@gmail.com", "+31874052359", "password"), "Heezerweg 186", "5614HJ", "Eindhoven", 12, testDate, "Come see it", false, 1, "Furnished"));
+
     }
 
     @Override
@@ -67,9 +71,27 @@ public class TestDataProperties implements IPropertyDatabase {
                     property.setSize(newProperty.getSize());
                     property.setDateAvailable(newProperty.getDateAvailable());
                     property.setType(newProperty.getType());
+                    property.setDescription(newProperty.getDescription());
+                    property.setPublisher(newProperty.getPublisher());
+                    property.setForSale(newProperty.getForSale());
+                    property.setPostalCode(newProperty.getPostalCode());
+                    property.setInterior(newProperty.getInterior());
+                    property.setRooms(newProperty.getRooms());
+
                     return true;
                 }
             }
         return false;
+    }
+
+    @Override
+    public List<Property> getPropertiesType(String type) {
+        List<Property> temp = new ArrayList<>();
+        for(Property property : propertyList) {
+            if (property.getType().equals(type)) {
+                temp.add(property);
+            }
+        }
+        return temp;
     }
 }

@@ -9,5 +9,6 @@ public interface IAccountDatabase {
     public Account loadAccount(int id);
     public boolean deleteAccount(int id);
     public boolean createAccount(Account acc);
-    public boolean upadteAccount(Account acc);
+    public boolean updateAccount(Account acc);
+    public Account logIn(String email, String password);
 }

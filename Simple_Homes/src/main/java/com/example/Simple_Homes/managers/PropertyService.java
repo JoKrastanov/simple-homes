@@ -1,20 +1,18 @@
 package com.example.Simple_Homes.managers;
 
-import com.example.Simple_Homes.classes.Account;
 import com.example.Simple_Homes.classes.Property;
 import com.example.Simple_Homes.intefaces.PropertyInterfaces.IPropertyDatabase;
-import com.example.Simple_Homes.intefaces.PropertyInterfaces.IPropertyManager;
-import com.example.Simple_Homes.repository.TestDataProperties;
+import com.example.Simple_Homes.intefaces.PropertyInterfaces.IPropertyService;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
-public class PropertyManager implements IPropertyManager {
+public class PropertyService implements IPropertyService {
 
     IPropertyDatabase PROPERTY_DATABASE;
 
-    public PropertyManager(IPropertyDatabase propertyDatabase)
+    public PropertyService(IPropertyDatabase propertyDatabase)
     {PROPERTY_DATABASE = propertyDatabase;}
 
     @Override

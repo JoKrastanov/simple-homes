@@ -2,18 +2,17 @@ package com.example.Simple_Homes.managers;
 
 import com.example.Simple_Homes.classes.Account;
 import com.example.Simple_Homes.intefaces.AccountInterfaces.IAccountDatabase;
-import com.example.Simple_Homes.intefaces.AccountInterfaces.IAccountManager;
-import com.example.Simple_Homes.repository.TestDataAccounts;
+import com.example.Simple_Homes.intefaces.AccountInterfaces.IAccountService;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
-public class AccountManager implements IAccountManager {
+public class AccountService implements IAccountService {
 
     private IAccountDatabase ACCOUNT_DATABASE;
 
-    public AccountManager(IAccountDatabase accountDatabase)
+    public AccountService(IAccountDatabase accountDatabase)
     {ACCOUNT_DATABASE = accountDatabase;}
 
     @Override
