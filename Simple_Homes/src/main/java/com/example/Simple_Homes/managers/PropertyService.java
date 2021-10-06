@@ -31,4 +31,7 @@ public class PropertyManager implements IPropertyManager {
 
     @Override
     public boolean updateProperty(Property property) {return PROPERTY_DATABASE.updateProperty(property);}
+
+    @Override
+    public List<Property> getPropertiesType(String type) {return PROPERTY_DATABASE.getPropertiesType(type);}
 }

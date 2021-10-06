@@ -29,5 +29,8 @@ public class AccountManager implements IAccountManager {
     public boolean addAccount(Account account) {return ACCOUNT_DATABASE.createAccount(account);}
 
     @Override
-    public boolean updateAccount(Account account) {return ACCOUNT_DATABASE.upadteAccount(account);}
+    public boolean updateAccount(Account account) {return ACCOUNT_DATABASE.updateAccount(account);}
+
+    @Override
+    public Account logInAccount(String email, String password) {return  ACCOUNT_DATABASE.logIn(email, password);}
 }

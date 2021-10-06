@@ -11,4 +11,5 @@ public interface IAccountManager {
     public boolean removeAccount(int id);
     public boolean addAccount(Account account);
     public boolean updateAccount(Account account);
+    public Account logInAccount(String email, String password);
 }

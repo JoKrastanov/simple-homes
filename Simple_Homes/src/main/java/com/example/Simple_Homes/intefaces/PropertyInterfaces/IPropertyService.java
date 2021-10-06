@@ -11,4 +11,5 @@ public interface IPropertyManager {
     public boolean removeProperty(int id);
     public boolean addProperty(Property property);
     public boolean updateProperty(Property property);
+    public List<Property> getPropertiesType(String type);
 }
