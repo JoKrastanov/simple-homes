@@ -1,0 +1,106 @@
+.NavBar-items {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #0E0B16;
+    font-size: 20px;
+    border-bottom: 1px dimgrey solid;
+}
+.NavBar-items li {
+    float: left;
+    display: inline;
+    margin-top: 0px;
+    margin-left: 10px;
+}
+
+.NavBar-items li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.NavBar-items li a:hover {
+    background-color: #A239CA;
+}
+
+.NavBar-items-right {
+    float: right;
+    list-style-type: none;
+    margin-left: 10px;
+    margin-right: 10px;
+    overflow: hidden;
+    font-size: 20px;
+    border-radius: 5px;
+}
+
+#logo {
+    height: 50px;
+    width: auto;
+    margin: 0 50px 0 50px;
+}
+
+.drop-down {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #0E0B16;
+    font-size: 20px;
+}
+
+.drop-down-menu {
+    visibility: hidden;
+    position: absolute;
+    background-color: #0E0B16;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.drop-down-item{
+    list-style-type: none;
+    padding: 0;
+    overflow: hidden;
+    background-color: #0E0B16;
+    font-size: 20px;
+    display: block;
+    margin-top: 7px;
+}
+
+.drop-down-item:hover {background-color: #A239CA;}
+
+#profile-logo-img {
+    object-fit: cover;
+    height: 50px;
+    width: auto;
+    margin-top: -10px;
+}
+
+#profile-logo-container {
+    height: 28px;
+    width: auto;
+}
+
+#log-out {
+    list-style-type: none;
+    margin: 0;
+    overflow: hidden;
+    background-color: #4717f6;
+    font-size: 20px;
+    padding: 14px 16px;
+    border-radius: 5px;
+}
+
+#log-out:hover {background-color: #A239CA;}
+
+.NavBar-items-right-item {
+    list-style-type: none;
+    margin: 0;
+    overflow: hidden;
+    background-color: #4717f6;
+    font-size: 20px;
+    border-radius: 5px;
+}

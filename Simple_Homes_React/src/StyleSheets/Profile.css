@@ -1,0 +1,23 @@
+.profile {
+    display: flex;
+    width: 100%;
+    text-align: center;
+
+}
+
+.profile-info {
+    border: 1px black solid;
+    width: 90vh;
+    height: 90vh;
+    display: inline-block;
+    margin: 7px auto;
+}
+
+.bookmarked-properties {
+    border: 1px black solid;
+    width: 60vh;
+    height: 90vh;
+    float: right;
+    display: inline-block;
+    margin: 7px auto;
+}
