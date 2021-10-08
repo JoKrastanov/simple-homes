@@ -12,4 +12,6 @@ public interface IPropertyService {
     public boolean addProperty(Property property);
     public boolean updateProperty(Property property);
     public List<Property> getPropertiesType(String type);
+    public List<Property> getPropertiesAddress(String address);
+    public List<Property> getPropertiesTypeAndAddress(String type, String address);
 }

@@ -15,11 +15,11 @@ public class TestDataProperties implements IPropertyDatabase {
     public TestDataProperties() {
         Date testDate = new Date(2021, Calendar.JULY, 19);
         propertyList.add(new Property("Room", 400, new Account("Test User 4", "tu4@gmail.com", "+31874052359", "password"), "Heezerweg 186", "5614HJ", "Eindhoven", 12, testDate, "Come see it", false, 1, "Furnished"));
-        propertyList.add(new Property("House", 1450, new Account("Test User 4", "tu4@gmail.com", "+31874052359", "password"), "Heezerweg 155", "5614JD", "Eindhoven", 80, testDate, "description", false, 4, "Upholstered"));
-        propertyList.add(new Property("Room", 400, new Account("Test User 4", "tu4@gmail.com", "+31874052359", "password"), "Heezerweg 186", "5614HJ", "Eindhoven", 12, testDate, "Come see it", false, 1, "Furnished"));
-        propertyList.add(new Property("Room", 400, new Account("Test User 4", "tu4@gmail.com", "+31874052359", "password"), "Heezerweg 186", "5614HJ", "Eindhoven", 12, testDate, "Come see it", false, 1, "Furnished"));
-        propertyList.add(new Property("Room", 400, new Account("Test User 4", "tu4@gmail.com", "+31874052359", "password"), "Heezerweg 186", "5614HJ", "Eindhoven", 12, testDate, "Come see it", false, 1, "Furnished"));
-        propertyList.add(new Property("Room", 400, new Account("Test User 4", "tu4@gmail.com", "+31874052359", "password"), "Heezerweg 186", "5614HJ", "Eindhoven", 12, testDate, "Come see it", false, 1, "Furnished"));
+        propertyList.add(new Property("House", 2050, new Account("Test User 4", "tu4@gmail.com", "+31874052359", "password"), "Heezerweg 155", "5614JD", "Groningen", 80, testDate, "description", false, 4, "Upholstered"));
+        propertyList.add(new Property("Studio", 850, new Account("Test User 4", "tu4@gmail.com", "+31874052359", "password"), "Boschdijk 213", "2150BW", "Eindhoven", 12, testDate, "Come see it", false, 1, "Furnished"));
+        propertyList.add(new Property("Apartment", 1100, new Account("Test User 4", "tu4@gmail.com", "+31874052359", "password"), "Johannes van der Waalsweg 86", "5416CB", "Eindhoven", 12, testDate, "Come see it", false, 1, "Furnished"));
+        propertyList.add(new Property("Room", 450, new Account("Test User 4", "tu4@gmail.com", "+31874052359", "password"), "Pioneerstraat 60", "6060AB", "Amsterdam", 12, testDate, "Come see it", false, 1, "Furnished"));
+        propertyList.add(new Property("Room", 380, new Account("Test User 4", "tu4@gmail.com", "+31874052359", "password"), "Markonilaan 10A", "1234YZ", "Eindhoven", 12, testDate, "Come see it", false, 1, "Furnished"));
 
     }
 
@@ -82,16 +82,5 @@ public class TestDataProperties implements IPropertyDatabase {
                 }
             }
         return false;
-    }
-
-    @Override
-    public List<Property> getPropertiesType(String type) {
-        List<Property> temp = new ArrayList<>();
-        for(Property property : propertyList) {
-            if (property.getType().equals(type)) {
-                temp.add(property);
-            }
-        }
-        return temp;
     }
 }

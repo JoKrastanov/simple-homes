@@ -12,5 +12,4 @@ public interface IPropertyDatabase {
     public boolean deleteProperty(int id);
     public boolean createProperty(Property property);
     public boolean updateProperty(Property property);
-    public List<Property> getPropertiesType(String type);
 }

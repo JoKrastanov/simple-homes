@@ -9,8 +9,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/properties")
@@ -33,10 +35,24 @@ public class PropertyController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping
-    public ResponseEntity<List<Property>> getAllProperties() {
-        List<Property> properties = (List<Property>) PROPERTY_MANAGER.getProperties();
-        if (properties != null)
-        {return ResponseEntity.ok().body(properties);}
+    public ResponseEntity<List<Property>> getAllProperties(@RequestParam(required = false, value = "location") String location, @RequestParam(required = false, value = "type") String type ) {
+
+        List<Property> properties = new ArrayList<>();
+
+        if (location != " " && type != " ") {
+            properties.addAll(PROPERTY_MANAGER.getPropertiesTypeAndAddress(type, location));
+        }
+        else if (location != null) {
+            properties.addAll(PROPERTY_MANAGER.getPropertiesAddress(location));
+        }
+        else if (type !=  null) {
+            properties.addAll(PROPERTY_MANAGER.getPropertiesType(type));
+        }
+        else {
+            properties.addAll(PROPERTY_MANAGER.getProperties());
+        }
+
+        if (properties != null) {return ResponseEntity.ok().body(properties);}
         else {return ResponseEntity.notFound().build();}
     }
 
@@ -99,12 +115,21 @@ public class PropertyController {
         }
     }
     
-    @CrossOrigin("http://localhost:3000")
-    @GetMapping(path = "/type")
-    public ResponseEntity<List<Property>> getPropertiesType(@RequestParam("type") String type) {
-        List<Property> properties = PROPERTY_MANAGER.getPropertiesType(type);
-        if (properties != null)
-        {return ResponseEntity.ok().body(properties);}
-        else {return ResponseEntity.notFound().build();}
-    }
+//    @CrossOrigin("http://localhost:3000")
+//    @GetMapping
+//    public ResponseEntity<List<Property>> getPropertiesType(@RequestParam("type") String type) {
+//        List<Property> properties = PROPERTY_MANAGER.getPropertiesType(type);
+//        if (properties != null)
+//        {return ResponseEntity.ok().body(properties);}
+//        else {return ResponseEntity.notFound().build();}
+//    }
+//
+//    @CrossOrigin("http://localhost:3000")
+//    @GetMapping
+//    public ResponseEntity<List<Property>> getPropertiesAddress(@RequestParam("address") String address) {
+//        List<Property> properties = PROPERTY_MANAGER.getPropertiesAddress(address);
+//        if (properties != null)
+//        {return ResponseEntity.ok().body(properties);}
+//        else {return ResponseEntity.notFound().build();}
+//    }
 }
