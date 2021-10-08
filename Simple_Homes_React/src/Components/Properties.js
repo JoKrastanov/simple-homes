@@ -37,24 +37,26 @@ const Properties = () => {
     if (!post) return null
     return (
         <div className={"properties"}>
-            {/*<div className={"properties-filters"}>*/}
-            {/*    das*/}
-            {/*</div>*/}
-            <PropertyFilters/>
-            <Router>
-                {post.map(p => (
-                    <>
-                    <Link to={"/property"} style={{ textDecoration: 'none' }}>
-                        <PropertyContainer key={p.id} {...p}/>
-                    </Link>
-                <Switch>
-                    <Route path={"/property"}>
-                        <ViewProperty {...p}/>
-                    </Route>
-                </Switch>
-                </>
+            <div className={"properties-filters"}>
+                <PropertyFilters/>
+            </div>
+            <div className={"properties-containers"}>
+                <Router>
+                    {post.map(p => (
+                        <>
+                            <Link to={"/property"} style={{ textDecoration: 'none' }}>
+                                <PropertyContainer key={p.id} {...p}/>
+                            </Link>
+                            <Switch>
+                                <Route path={"/property"}>
+                                    <ViewProperty {...p}/>
+                                </Route>
+                            </Switch>
+                        </>
                     ))}
-            </Router>
+                </Router>
+
+            </div>
 
         </div>
     )

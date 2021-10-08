@@ -1,8 +1,9 @@
 import React from "react";
+import "../StyleSheets/PropertyFilters.css";
 
 function PropertyFilters() {
     return (
-        <div className={"PropertyFilter"}>
+        <div className={"PropertyFilters"}>
             <p>test</p>
         </div>
     )
