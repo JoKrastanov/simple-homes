@@ -39,7 +39,7 @@ public class PropertyController {
 
         List<Property> properties = new ArrayList<>();
 
-        if (location != " " && type != " ") {
+        if (location != null && type != null) {
             properties.addAll(PROPERTY_MANAGER.getPropertiesTypeAndAddress(type, location));
         }
         else if (location != null) {
