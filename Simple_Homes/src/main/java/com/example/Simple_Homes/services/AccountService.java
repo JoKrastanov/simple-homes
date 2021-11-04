@@ -4,6 +4,7 @@ import com.example.Simple_Homes.classes.Account;
 import com.example.Simple_Homes.intefaces.AccountInterfaces.IAccountDatabase;
 import com.example.Simple_Homes.intefaces.AccountInterfaces.IAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,21 +16,19 @@ public class AccountService implements IAccountService {
 
     @Autowired
     public AccountService(IAccountDatabase accountDatabase)
-    {
-        ACCOUNT_DATABASE = accountDatabase;
-    }
+    {ACCOUNT_DATABASE = accountDatabase;}
 
     @Override
-    public List<Account> getAccounts() {return ACCOUNT_DATABASE.loadAllAccounts();}
+    public List<Account> getAccounts() {return (List<Account>) ACCOUNT_DATABASE.loadAllAccounts();}
 
     @Override
-    public Account getAccount(Long id) {return  ACCOUNT_DATABASE.loadAccount(id);}
+    public Account getAccount(int id) {return  (Account) ACCOUNT_DATABASE.loadAccount(id);}
 
     @Override
-    public void removeAccount(Long id) {ACCOUNT_DATABASE.deleteAccount(id);}
+    public boolean removeAccount(int id) {return ACCOUNT_DATABASE.deleteAccount(id);}
 
     @Override
-    public void addAccount(Account account) {ACCOUNT_DATABASE.createAccount(account);}
+    public boolean addAccount(Account account) {return ACCOUNT_DATABASE.createAccount(account);}
 
     @Override
     public boolean updateAccount(Account account) {return ACCOUNT_DATABASE.updateAccount(account);}

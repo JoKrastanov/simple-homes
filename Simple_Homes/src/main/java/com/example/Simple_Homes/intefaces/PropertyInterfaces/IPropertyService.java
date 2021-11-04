@@ -6,12 +6,12 @@ import com.example.Simple_Homes.classes.Property;
 import java.util.List;
 
 public interface IPropertyService {
-    public List<Property> getProperties();
-    Property getProperty(int id);
-    public boolean removeProperty(int id);
-    public boolean addProperty(Property property);
-    public boolean updateProperty(Property property);
-    public List<Property> getPropertiesType(String type);
-    public List<Property> getPropertiesAddress(String address);
-    public List<Property> getPropertiesTypeAndAddress(String type, String address);
+    List<Property> getProperties();
+    Property getProperty(Long id);
+    boolean removeProperty(Long id);
+    boolean addProperty(Property property);
+    boolean updateProperty(Property property);
+    List<Property> getPropertiesType(String type);
+    List<Property> getPropertiesAddress(String address);
+    List<Property> getPropertiesTypeAndAddress(String type, String address);
 }

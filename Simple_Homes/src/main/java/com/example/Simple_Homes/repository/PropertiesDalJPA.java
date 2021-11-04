@@ -2,20 +2,22 @@ package com.example.Simple_Homes.repository;
 
 import com.example.Simple_Homes.classes.Account;
 import com.example.Simple_Homes.classes.Property;
-import com.example.Simple_Homes.intefaces.PropertyInterfaces.IPropertyDatabase;
-import org.springframework.stereotype.Component;
+import com.example.Simple_Homes.repositoryInterfaces.IPropertyRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
-@Component
-public class TestDataProperties implements IPropertyDatabase {
+@Repository
+public class TestDataProperties implements IPropertyRepository {
 
+    @Autowired
     private static final List<Property> propertyList = new ArrayList<>();
 
     public TestDataProperties() {
         Date testDate = new Date(2021, Calendar.JULY, 19);
         propertyList.add(new Property("Room", 400, new Account("Test User 4", "tu4@gmail.com", "+31874052359", "password"), "Heezerweg 186", "5614HJ", "Eindhoven", 12, testDate, "Come see it", false, 1, "Furnished"));
-        propertyList.add(new Property("House", 2050, new Account("Test User 4", "tu4@gmail.com", "+31874052359", "password"), "Heezerweg 155", "5614JD", "Groningen", 80, testDate, "description", false, 4, "Upholstered"));
+        propertyList.add(new Property("House", 2050, new Account("Test User 4", "tu4@gmail.com", "+31874052359", "password"), "Heezerweg 155", "5614JD", "Groningen", 80, testDate, "description", true, 4, "Upholstered"));
         propertyList.add(new Property("Studio", 850, new Account("Test User 4", "tu4@gmail.com", "+31874052359", "password"), "Boschdijk 213", "2150BW", "Eindhoven", 12, testDate, "Come see it", false, 1, "Furnished"));
         propertyList.add(new Property("Apartment", 1100, new Account("Test User 4", "tu4@gmail.com", "+31874052359", "password"), "Johannes van der Waalsweg 86", "5416CB", "Eindhoven", 12, testDate, "Come see it", false, 1, "Furnished"));
         propertyList.add(new Property("Room", 450, new Account("Test User 4", "tu4@gmail.com", "+31874052359", "password"), "Pioneerstraat 60", "6060AB", "Amsterdam", 12, testDate, "Come see it", false, 1, "Furnished"));

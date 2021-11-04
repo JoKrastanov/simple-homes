@@ -4,22 +4,18 @@ import com.example.Simple_Homes.classes.Property;
 import com.example.Simple_Homes.intefaces.PropertyInterfaces.IPropertyDatabase;
 import com.example.Simple_Homes.intefaces.PropertyInterfaces.IPropertyService;
 import com.fasterxml.jackson.databind.annotation.JsonAppend;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-@Service
+@Component
 public class PropertyService implements IPropertyService {
 
-    @Autowired
-    private IPropertyDatabase PROPERTY_DATABASE;
+    IPropertyDatabase PROPERTY_DATABASE;
 
-    public PropertyService(IPropertyDatabase propertyDatabase)
-    {
+    public PropertyService(IPropertyDatabase propertyDatabase) {
         PROPERTY_DATABASE = propertyDatabase;
     }
 
@@ -29,12 +25,12 @@ public class PropertyService implements IPropertyService {
     }
 
     @Override
-    public Property getProperty(Long id) {
+    public Property getProperty(int id) {
         return PROPERTY_DATABASE.loadProperty(id);
     }
 
     @Override
-    public boolean removeProperty(Long id) {
+    public boolean removeProperty(int id) {
         return PROPERTY_DATABASE.deleteProperty(id);
     }
 

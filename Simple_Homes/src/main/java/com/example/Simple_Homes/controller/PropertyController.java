@@ -4,8 +4,10 @@ import com.example.Simple_Homes.classes.Account;
 import com.example.Simple_Homes.classes.Property;
 import com.example.Simple_Homes.intefaces.PropertyInterfaces.IPropertyService;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -14,19 +16,22 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+@Controller
+
 @RestController
 @RequestMapping("/properties")
-
 public class PropertyController {
+
+    @Autowired
     private IPropertyService PROPERTY_MANAGER;
 
     public PropertyController(IPropertyService propertyManager) {PROPERTY_MANAGER = propertyManager;}
 
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("{id}")
-    public ResponseEntity<Property> getPropertyPath(@PathVariable(value = "id") int id)
+    public ResponseEntity<Property> getPropertyPath(@PathVariable(value = "id") Long id)
     {
-        Property property = (Property)PROPERTY_MANAGER.getProperty(id);
+        Property property = PROPERTY_MANAGER.getProperty(id);
 
         if(property != null)
         {return ResponseEntity.ok().body(property);}
@@ -35,30 +40,15 @@ public class PropertyController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping
-    public ResponseEntity<List<Property>> getAllProperties(@RequestParam(required = false, value = "location") String location, @RequestParam(required = false, value = "type") String type ) {
-
-        List<Property> properties = new ArrayList<>();
-
-        if (location != null && type != null) {
-            properties.addAll(PROPERTY_MANAGER.getPropertiesTypeAndAddress(type, location));
-        }
-        else if (location != null) {
-            properties.addAll(PROPERTY_MANAGER.getPropertiesAddress(location));
-        }
-        else if (type !=  null) {
-            properties.addAll(PROPERTY_MANAGER.getPropertiesType(type));
-        }
-        else {
-            properties.addAll(PROPERTY_MANAGER.getProperties());
-        }
-
+    public ResponseEntity<List<Property>> getAllProperties() {
+        List<Property> properties = PROPERTY_MANAGER.getProperties();
         if (properties != null) {return ResponseEntity.ok().body(properties);}
         else {return ResponseEntity.notFound().build();}
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
     @DeleteMapping("{id}")
-    public ResponseEntity deleteProperty(@PathVariable int id) {
+    public ResponseEntity deleteProperty(@PathVariable Long id) {
         PROPERTY_MANAGER.removeProperty(id);
         return  ResponseEntity.ok().build();
     }
@@ -91,9 +81,9 @@ public class PropertyController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PutMapping("{id}")
-    public ResponseEntity<Property> updateProperty(@PathVariable("id") int id, @RequestParam("type") String type, @RequestParam("price") double price, @RequestParam("address") String address, @RequestParam("postalCode") String postalCode, @RequestParam("city") String city, @RequestParam("size") int size, @RequestParam("DateAvailable") Date dateAvailable, @RequestParam("Availability") boolean available, @RequestParam("description") String description, @RequestParam("publisher")Account publisher, @RequestParam("forSale") boolean forSale, @RequestParam("rooms") int rooms, @RequestParam("interior") String interior)
+    public ResponseEntity<Property> updateProperty(@PathVariable("id") Long id, @RequestParam("type") String type, @RequestParam("price") double price, @RequestParam("address") String address, @RequestParam("postalCode") String postalCode, @RequestParam("city") String city, @RequestParam("size") int size, @RequestParam("DateAvailable") String dateAvailable, @RequestParam("Availability") boolean available, @RequestParam("description") String description, @RequestParam("publisher")Account publisher, @RequestParam("forSale") boolean forSale, @RequestParam("rooms") int rooms, @RequestParam("interior") String interior)
     {
-        Property property = (Property)PROPERTY_MANAGER.getProperty(id);
+        Property property = PROPERTY_MANAGER.getProperty(id);
         if (property == null)
         {return new ResponseEntity("Property ID is invalid", HttpStatus.NOT_FOUND);}
         else {
@@ -105,7 +95,7 @@ public class PropertyController {
             property.setDateAvailable(dateAvailable);
             property.setType(type);
             property.setDescription(description);
-            property.setPublisher(publisher);
+            property.setPublisher(publisher.getId());
             property.setForSale(forSale);
             property.setPostalCode(postalCode);
             property.setInterior(interior);

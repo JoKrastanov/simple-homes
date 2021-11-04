@@ -7,9 +7,9 @@ import com.fasterxml.jackson.databind.annotation.JsonAppend;
 import java.util.List;
 
 public interface IPropertyDatabase {
-    public List<Property> loadAllProperties();
-    public Property loadProperty(int id);
-    public boolean deleteProperty(int id);
-    public boolean createProperty(Property property);
-    public boolean updateProperty(Property property);
+    List<Property> loadAllProperties();
+    Property loadProperty(Long id);
+    boolean deleteProperty(Long id);
+    boolean createProperty(Property property);
+    boolean updateProperty(Property property);
 }
