@@ -1,41 +1,58 @@
 package com.example.Simple_Homes.classes;
 
+import javax.persistence.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
+@Entity
+@Table(name = "property")
 public class Property {
-    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-    private static final AtomicInteger count = new AtomicInteger(0);
 
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
+    @Column(name = "type")
     private String type;
-    private double price;
-    private boolean taken;
+    @Column(name = "price")
+    private Double price;
+    @Column(name = "taken")
+    private Boolean taken;
+    @Column(name = "description")
     private String description;
-    private boolean forSale;
-    private Account publisher;
+    @Column(name = "forSale")
+    private Boolean forSale;
+    @Column(name = "publisher")
+    private Long publisherId;
+    @Column(name = "address")
     private String address;
+    @Column(name = "postalCode")
     private String postalCode;
+    @Column(name = "city")
     private String city;
-    private int size;
-    private Date dateAvailable;
-    private Date datePublished;
-    private int rooms;
+    @Column(name = "size")
+    private Integer size;
+    @Column(name = "dateAvailable")
+    private String dateAvailable;
+    @Column(name = "datePublished")
+    private String datePublished;
+    @Column(name = "rooms")
+    private Integer rooms;
+    @Column(name = "interior")
     private String interior;
-    private List<Viewing> viewings;
 
-    public Property(String type, double price, Account a, String address, String postalCode, String city, int size, Date dateAvailable, String description, boolean forSale, int rooms, String interior)
+    public Property()  {}
+
+    public Property(String type, double price, Long a, String address, String postalCode, String city, int size, String dateAvailable, String description, boolean forSale, int rooms, String interior, String datePublished)
     {
-        id = count.incrementAndGet();
-        datePublished = new Date(System.currentTimeMillis());
         taken = false;
 
         this.type = type;
         this.price = price;
-        this.publisher = a;
+        this.publisherId = a;
         this.address = address;
         this.postalCode = postalCode;
         this.city = city;
@@ -45,18 +62,21 @@ public class Property {
         this.forSale = forSale;
         this.rooms = rooms;
         this.interior = interior;
-        viewings = new ArrayList<>();
+        this.datePublished = datePublished;
+
     }
 
+
     // Get and Set Properties
-    public int getId() {return id;}
+    public Long getId() {return id;}
+    public void setId(Long id) {this.id = id;}
 
     public String getType() {return type;}
     public void setType(String type) {
         this.type = type;
     }
 
-    public double getPrice() {return price;}
+    public Double getPrice() {return price;}
     public void setPrice(double price) {
         this.price = price;
     }
@@ -71,25 +91,21 @@ public class Property {
         this.city = city;
     }
 
-    public int getSize() {return size;}
+    public Integer getSize() {return size;}
     public void setSize(int size) {
         this.size = size;
     }
 
-    public Date getDateAvailable() {return dateAvailable;}
-    public void setDateAvailable(Date dateAvailable) {
+    public String getDateAvailable() {return dateAvailable;}
+    public void setDateAvailable(String dateAvailable) {
         this.dateAvailable = dateAvailable;
     }
 
-    public boolean getAvailability() {
+    public Boolean getAvailability() {
         return taken;
     }
     public void setAvailability(boolean taken) {
         this.taken = taken;
-    }
-
-    public String getDate() {
-        return formatter.format(datePublished);
     }
 
     public String getDescription() {return  description;}
@@ -101,11 +117,8 @@ public class Property {
     public String getPostalCode() {return postalCode;}
     public void setPostalCode(String postalCode) {this.postalCode = postalCode;}
 
-    public Account getPublisher() {return publisher;}
-    public void setPublisher(Account publisher) {this.publisher = publisher;}
-
-    public List<Viewing> getViewings() {return viewings;}
-    public void setViewings(List<Viewing> viewings) {this.viewings = viewings;}
+    public Long getPublisher() {return publisherId;}
+    public void setPublisher(Long publisher) {this.publisherId = publisher;}
 
     public int getRooms() {return rooms;}
     public void setRooms(int rooms) {this.rooms = rooms;}
@@ -113,7 +126,5 @@ public class Property {
     public String getInterior() {return interior;}
     public void setInterior(String interior) {this.interior = interior;}
 
-    // Methods
-    public void addViewing(Viewing viewing) {viewings.add(viewing);}
 }
 

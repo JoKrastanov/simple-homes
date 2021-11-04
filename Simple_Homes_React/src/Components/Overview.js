@@ -1,9 +1,11 @@
-import '../StyleSheets/App.css';
+import '../StyleSheets/Overview.css';
 import React, { useState, useEffect } from 'react';
 
 import axios from "axios";
 import {Link, Redirect, Route, Router, Switch, useHistory} from "react-router-dom";
 import ReactDOM from "react-dom";
+
+import welcomeImage from "../Images/wallpaperflare.com_wallpaper.jpg";
 
 export default function Overview() {
 
@@ -58,47 +60,48 @@ export default function Overview() {
             });
     }
 
-
     if (!post) return null;
 
 
     //Output
     return (
-        <div className={"DataOverview"}>
-            <table>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>Password</th>
-                </tr>
-                {post.map(p => (
+        <div>
+            <div className={"DataOverview"}>
+                <table>
                     <tr>
-                        <td>{p.id}</td>
-                        <td>{p.name}</td>
-                        <td>{p.email}</td>
-                        <td>{p.phoneNumber}</td>
-                        <td>{p.password}</td>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Password</th>
                     </tr>
-                ))}
-            </table>
-            <div>
-                <label>ID:</label> <br/>
-                <input id={"id"} type={<textarea></textarea>} required/> <br/>
-                <label>Name:</label> <br/>
-                <input id={"name"} type={<textarea></textarea>} required/> <br/>
-                <label>Email:</label> <br/>
-                <input id={"email"} type={<textarea></textarea>} required/> <br/>
-                <label>Phone:</label> <br/>
-                <input id={"phone"} type={<textarea></textarea>} required/> <br/>
-                <label>Password</label> <br/>
-                <input id={"password"} type={<textarea></textarea>} required/> <br/>
-                <button onClick={createPost}>Create Post</button>
-                <br/>
-                <button onClick={updatePost}>Update</button>
-                <button onClick={deletePost}>Delete</button>
+                    {post.map(p => (
+                        <tr>
+                            <td>{p.id}</td>
+                            <td>{p.name}</td>
+                            <td>{p.email}</td>
+                            <td>{p.phoneNumber}</td>
+                            <td>{p.password}</td>
+                        </tr>
+                    ))}
+                </table>
+                <div>
+                    <label>ID:</label> <br/>
+                    <input id={"id"} type={<textarea></textarea>} required/> <br/>
+                    <label>Name:</label> <br/>
+                    <input id={"name"} type={<textarea></textarea>} required/> <br/>
+                    <label>Email:</label> <br/>
+                    <input id={"email"} type={<textarea></textarea>} required/> <br/>
+                    <label>Phone:</label> <br/>
+                    <input id={"phone"} type={<textarea></textarea>} required/> <br/>
+                    <label>Password</label> <br/>
+                    <input id={"password"} type={<textarea></textarea>} required/> <br/>
+                    <button onClick={createPost}>Create Post</button>
+                    <br/>
+                    <button onClick={updatePost}>Update</button>
+                    <button onClick={deletePost}>Delete</button>
 
+                </div>
             </div>
         </div>
     );

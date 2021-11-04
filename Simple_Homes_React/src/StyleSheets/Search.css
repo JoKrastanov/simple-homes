@@ -1,0 +1,9 @@
+#header-search {
+    width: 80%;
+}
+
+#search-button {
+    background-image: url("../Images/search.png");
+    width: 20%;
+    height: auto;
+}

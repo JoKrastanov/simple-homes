@@ -1,6 +1,9 @@
-
 .properties-filters {
     margin: 5px auto;
     width: 97%;
     border: 2px black solid;
+}
+#property-button {
+    background-color: transparent;
+    width: 100%;
 }

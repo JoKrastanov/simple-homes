@@ -5,19 +5,20 @@ import Properties from "./Properties"
 import LogIn from "./LogIn";
 import Profile from "./Profile";
 import Register from "./Register";
+import Home from "./Home";
 
 import "../StyleSheets/NavBar.css";
 import logo from "../Images/Capture.PNG"
 import profileLogo from "../Images/profile-icon-male-user-person-avatar-symbol-vector-20910833.png";
+import welcomeImage from "../Images/wallpaperflare.com_wallpaper.jpg";
 
-import {useState} from "react";
+import {useState, useEffect} from "react";
 
 import {
     BrowserRouter as Router,
     Switch,
     Route,
     Link,
-    useHistory
 } from "react-router-dom";
 
 import {
@@ -27,11 +28,10 @@ import {
     DropdownItem
 } from "reactstrap";
 
+
 export default function NavBar() {
 
     const [loggedIn, setLoggedIn] = useState(false);
-
-    let history = useHistory();
 
     const logIn = () => {
         setLoggedIn(true);
@@ -64,7 +64,6 @@ export default function NavBar() {
                         <button onClick={logOut}  id={"log-out"}>Log Out</button>
                     </li>
                 </div>
-
             );
         }
         else {
@@ -80,38 +79,40 @@ export default function NavBar() {
             );
         }
     }
-
-
     return (
-        <Router>
-            <div className={"NavBar"}>
-                <ul className={"NavBar-items"}>
-                    <li>
-                        <img id={"logo"} src={logo}/>
-                    </li>
-                    <li>
-                        <Link to="/Overview">Home</Link>
-                    </li>
-                    <li>
-                        <Dropdown onMouseOver={onMouseEnter} onMouseLeave={onMouseLeave}>
-                            <DropdownToggle className={"drop-down"}>
-                                <Link
-                                    className={"drop-down"}
-                                    to="/Properties">Properties</Link>
-                            </DropdownToggle>
-                            <DropdownMenu id={"menu"} className={"drop-down-menu"}>
-                                <DropdownItem className={"drop-down-item"}>Rent</DropdownItem>
-                                <DropdownItem className={"drop-down-item"}>Buy</DropdownItem>
-                            </DropdownMenu>
-                        </Dropdown>
-                    </li>
-                    <li>
-                        <Link to="/Overview">Upload a property</Link>
-                    </li>
-                    <div className={"NavBar-items-right"}>
-                        {isLoggedIn()}
-                    </div>
-                </ul>
+        <div className={"NavBar"}>
+            <Router>
+                <div>
+                    <ul className={"NavBar-items"}>
+                        <li>
+                            <img id={"logo"} src={logo}/>
+                        </li>
+                        <li>
+                            <Link to="/Home">Home</Link>
+                        </li>
+                        <li>
+                            <Dropdown onMouseOver={onMouseEnter} onMouseLeave={onMouseLeave}>
+                                <DropdownToggle className={"drop-down"}>
+                                    <Link
+                                        className={"drop-down"}
+                                        to="/Properties">Properties</Link>
+                                </DropdownToggle>
+                                <DropdownMenu id={"menu"} className={"drop-down-menu"}>
+                                    <DropdownItem className={"drop-down-item"}>Rent</DropdownItem>
+                                    <DropdownItem className={"drop-down-item"}>Buy</DropdownItem>
+                                </DropdownMenu>
+                            </Dropdown>
+                        </li>
+                        <li>
+                            <Link to="/Overview">Upload a property</Link>
+                        </li>
+                        <li>
+                            <Link to="/Overview">Users(For development)</Link>
+                        </li>
+                        <div className={"NavBar-items-right"}>
+                            {isLoggedIn()}
+                        </div>
+                    </ul>
                     <Switch>
                         <Route path="/Overview">
                             <Overview/>
@@ -128,8 +129,15 @@ export default function NavBar() {
                         <Route path="/Register">
                             <Register/>
                         </Route>
+                        <Route path="/Home">
+                            <Home/>
+                        </Route>
                     </Switch>
+                </div>
+            </Router>
+            <div id={"welcome"}>
+                <img id={"welcomeImage"} src={welcomeImage}/>
             </div>
-        </Router>
+        </div>
     );
 }

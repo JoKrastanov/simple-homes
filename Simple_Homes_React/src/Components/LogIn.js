@@ -1,6 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import GoogleLogin from 'react-google-login';
 
 import "../StyleSheets/LogIn.css";
 import {
@@ -11,23 +9,12 @@ import {
     useHistory
 } from "react-router-dom";
 
-import { useCookies } from 'react-cookie';
-
-import Register from "./Register";
-import Profile from "./Profile";
-
 import axios from "axios";
 
 function LogIn(props) {
 
-    const [cookie, setCookie, removeCookie] = useCookies();
-
     const baseURL = "http://localhost:8080/accounts/login/";
     let history = useHistory();
-
-    const responseGoogle = (response) => {
-        console.log(response);
-    }
 
     const redirectToRegister = () => {
         history.push("/Register");
@@ -43,7 +30,6 @@ function LogIn(props) {
 
                 if (response.status === 200) {
                     props.onChange(true);
-
                     history.push("/Overview");}
             });
     }
@@ -59,16 +45,6 @@ function LogIn(props) {
                 <input type="password" placeholder="Enter Password" name="psw" id={"password"} required/>
 
                 <button onClick={logIn}>Login</button>
-                {/*<div className={"google-button"}>*/}
-                {/*    <GoogleLogin*/}
-                {/*        clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"*/}
-                {/*        buttonText="Log In With Google"*/}
-                {/*        onSuccess={responseGoogle}*/}
-                {/*        onFailure={responseGoogle}*/}
-                {/*        cookiePolicy={'single_host_origin'}*/}
-                {/*        isSignedIn={false}*/}
-                {/*    />*/}
-                {/*</div>*/}
                 <label>
                     <input type="checkbox" name="remember"/> Remember me
                 </label>

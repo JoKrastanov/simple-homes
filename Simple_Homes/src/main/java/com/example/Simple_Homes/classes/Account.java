@@ -1,32 +1,49 @@
 package com.example.Simple_Homes.classes;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
 
+@Entity
+@Table(name = "account")
 public class Account {
-    private static final AtomicInteger count = new AtomicInteger(0);
-    private int id;
+
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
+    @Column(name = "password")
     private String password;
+    @Column(name = "name")
     private String name;
+    @Column(name = "email")
     private String email;
+    @Column(name = "phoneNumber")
     private String phoneNumber;
-    private ArrayList<Property> propertyList;
-    private ArrayList<Property> bookmarkedProperties;
+
+    public Account() {
+
+    }
+
 
     public Account(String name, String email, String phoneNumber, String password) {
-        id = count.incrementAndGet();
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.password = password;
-        propertyList = new ArrayList<>();
-        bookmarkedProperties = new ArrayList<>();
     }
 
     // Get & Set Methods
-    public int getId()
-    {return id;}
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getName()
     {return name;}
@@ -48,17 +65,5 @@ public class Account {
     public void setPassword(String password)
     {this.password = password;}
 
-    public List<Property> getUploadedProperties()
-    {return propertyList;}
-
-    public List<Property> getBookmarkedProperties()
-    {return bookmarkedProperties;}
-
-    //Methods
-    public void uploadProperty(Property property)
-    {propertyList.add(property);}
-
-    public void bookmarkProperty(Property property)
-    {propertyList.add(property);}
 }
 

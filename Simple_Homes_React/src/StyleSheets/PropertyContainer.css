@@ -1,11 +1,12 @@
 .property-container {
     list-style-type: none;
-    width: 50%;
-    height: 180px;
+    width: 70%;
+    height: 200px;
     overflow: hidden;
     border: 1px black solid;
     min-width: 440px;
-    margin: 10px auto;
+    background-color: whitesmoke;
+    margin: 10px auto 10px;
 }
 .property-container-header {
     color: darkblue;
@@ -47,6 +48,7 @@
     display: flex;
     margin-left: 5rem;
     margin-top: -30px;
+    color: black;
 }
 
 .property-container-image {
@@ -61,7 +63,12 @@
     float: left;
 
 }
-
+.property-container-publisher {
+    float: left;
+    margin-top: -5px;
+    color: dodgerblue;
+    text-decoration: underline;
+}
 #image {
     object-fit: fill;
 }

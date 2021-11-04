@@ -1,4 +1,15 @@
+#welcome {height: 300px;}
+#welcomeImage {
+    z-index: -2;
+    opacity: 40%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    min-height: 100%;
+}
 .NavBar-items {
+    z-index: 1;
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -6,6 +17,9 @@
     background-color: #0E0B16;
     font-size: 20px;
     border-bottom: 1px dimgrey solid;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
 }
 .NavBar-items li {
     float: left;

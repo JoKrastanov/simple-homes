@@ -4,6 +4,7 @@ import com.example.Simple_Homes.LogInForm;
 import com.example.Simple_Homes.classes.Account;
 import com.example.Simple_Homes.intefaces.AccountInterfaces.IAccountService;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,7 @@ import java.util.List;
 @RequestMapping("/accounts")
 public class AccountController {
 
+    @Autowired
     private IAccountService ACCOUNT_MANAGER;
 
     public AccountController(IAccountService accountManager)
@@ -27,9 +29,9 @@ public class AccountController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("{id}")
-    public ResponseEntity<Account> getAccountPath(@PathVariable(value = "id") int id)
+    public ResponseEntity<Account> getAccountPath(@PathVariable(value = "id") Long id)
     {
-        Account account = (Account)ACCOUNT_MANAGER.getAccount(id);
+        Account account = ACCOUNT_MANAGER.getAccount(id);
 
         if (account != null)
         {return ResponseEntity.ok().body(account);}
@@ -39,7 +41,7 @@ public class AccountController {
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping
     public ResponseEntity<List<Account>> getAllAccounts() {
-        List<Account> accounts = (List<Account>) ACCOUNT_MANAGER.getAccounts();
+        List<Account> accounts = ACCOUNT_MANAGER.getAccounts();
         if (accounts != null)
         {return ResponseEntity.ok().body(accounts);}
         else {return ResponseEntity.notFound().build();}
@@ -47,7 +49,7 @@ public class AccountController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @DeleteMapping("{id}")
-    public ResponseEntity deleteAccount(@PathVariable int id) {
+    public ResponseEntity deleteAccount(@PathVariable Long id) {
         ACCOUNT_MANAGER.removeAccount(id);
         return  ResponseEntity.ok().build();
     }
@@ -56,16 +58,10 @@ public class AccountController {
     @PostMapping
     public ResponseEntity<Account> createAccount(@RequestBody Account account)
     {
-    if(!ACCOUNT_MANAGER.addAccount(account))
-    {
-        String answer = "Account with ID " + account.getId() + " already exists!";
-        return new ResponseEntity(answer, HttpStatus.CONFLICT);
-    }
-    else {
+        ACCOUNT_MANAGER.addAccount(account);
         String url = "accounts/" + account.getId();
         URI uri =URI.create(url);
         return new ResponseEntity(uri, HttpStatus.CREATED);
-    }
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
@@ -80,8 +76,8 @@ public class AccountController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PutMapping("{id}")
-    public ResponseEntity<Account> updateAccount(@PathVariable("id") int id, @RequestParam("name") String name, @RequestParam("email") String email, @RequestParam("phoneNumber") String phoneNumber, @RequestParam("password") String password){
-        Account account = (Account) ACCOUNT_MANAGER.getAccount(id);
+    public ResponseEntity<Account> updateAccount(@PathVariable("id") Long id, @RequestParam("name") String name, @RequestParam("email") String email, @RequestParam("phoneNumber") String phoneNumber, @RequestParam("password") String password){
+        Account account = ACCOUNT_MANAGER.getAccount(id);
         if (account == null)
         {
             return new ResponseEntity("Account ID is invalid", HttpStatus.NOT_FOUND);
