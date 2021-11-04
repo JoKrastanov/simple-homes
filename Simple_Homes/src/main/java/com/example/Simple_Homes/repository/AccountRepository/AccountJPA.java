@@ -16,6 +16,8 @@ public class AccountJPA implements IAccountDatabase {
     @Autowired
     IAccountRepository repo;
 
+    public AccountJPA() {}
+
     @Override
     public List<Account> loadAllAccounts() {
         return repo.findAll();
