@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import axios from "axios";
 
 import {useHistory} from "react-router-dom";
@@ -9,45 +9,79 @@ const Register = () => {
 
     const baseURL = "http://localhost:8080/accounts";
     let history = useHistory();
+    const [name, setName] = useState();
+    const [password, setPassword] = useState();
+    const [repPassword, setRepPassword] = useState();
+    const [email, setEmail] = useState();
+    const [phone, setPhone] = useState();
 
-    const RegisterUser = () => {
-        let firstPass = document.getElementById("psw").value;
-        let secondPass = document.getElementById("repPsw").value;
-        if(firstPass === secondPass) {
+    const [submitted, setSubmitted] = useState(false);
+    const [error, setError] = useState(false);
+
+    const handleName = (e) => {
+        setName(e.target.value)
+        setSubmitted(false);
+    }
+
+    const handlePassword = (e) => {
+        setPassword(e.target.value)
+        setSubmitted(false);
+    }
+
+    const handleEmail = (e) => {
+        setEmail(e.target.value)
+        setSubmitted(false);
+    }
+
+    const handlePhone = (e) => {
+        setPhone(e.target.value)
+        setSubmitted(false);
+    }
+
+    const handleRepPassword = (e) => {
+        setRepPassword(e.target.value)
+        setSubmitted(false);
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if(password === repPassword) {
             axios
                 .post(baseURL, {
-                "password" : document.getElementById("psw").value,
-                "name" : document.getElementById("name").value,
-                "email" : document.getElementById("email").value,
-                "phoneNumber" : document.getElementById("phone").value
+                password : password,
+                name : name,
+                username : email,
+                phoneNumber : phone
                 })
                 .then((response) => {
-                    if (response.status === 201) {
-                        history.push("/Overview");}
+                    if (response.status === 200) {
+                        history.push("/LogIn");}
                 });
         }
     }
 
     return (
         <div className={"Register"}>
-            <div className="container">
-                <label htmlFor="name"><b>Name</b></label>
-                <input type="text" placeholder="Enter Your Full Name" name="name" id={"name"} required/>
+            <form onSubmit={handleSubmit}>
+                <div className="container">
+                    <label htmlFor="name"><b>Name</b></label>
+                    <input type="text" placeholder="Enter Your Full Name" name="name" id={"name"} value={name} onChange={handleName} required/>
 
-                <label htmlFor="email"><b>Email</b></label>
-                <input type="text" placeholder="Enter Email" name="email" id={"email"} required/>
+                    <label htmlFor="email"><b>Email</b></label>
+                    <input type="text" placeholder="Enter Email" name="email" id={"email"} value={email} onChange={handleEmail} required/>
 
-                <label htmlFor="phone"><b>Phone number</b></label>
-                <input type="text" placeholder="Enter Phone number" name="phone" id={"phone"} required/>
+                    <label htmlFor="phone"><b>Phone number</b></label>
+                    <input type="text" placeholder="Enter Phone number" name="phone" id={"phone"} value={phone} onChange={handlePhone} required/>
 
-                <label htmlFor="psw"><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="psw" id={"psw"} required/>
+                    <label htmlFor="psw"><b>Password</b></label>
+                    <input type="password" placeholder="Enter Password" name="psw" id={"psw"} value={password} onChange={handlePassword} required/>
 
-                <label htmlFor="repPsw"><b>Password</b></label>
-                <input type="password" placeholder="Repeat Password" name="repPsw" id={"repPsw"} required/>
+                    <label htmlFor="repPsw"><b>Repeat Password</b></label>
+                    <input type="password" placeholder="Repeat Password" name="repPsw" id={"repPsw"} value={repPassword} onChange={handleRepPassword} required/>
 
-                <button type="button" onClick={RegisterUser}>Register</button>
-            </div>
+                    <button type="submit">Register</button>
+                </div>
+            </form>
         </div>
     );
 }

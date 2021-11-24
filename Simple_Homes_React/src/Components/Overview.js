@@ -29,7 +29,7 @@ export default function Overview() {
         axios
             .post(baseURL, {
                 name: document.getElementById("name").value,
-                email: document.getElementById("email").value,
+                username: document.getElementById("email").value,
                 phoneNumber: document.getElementById("phone").value,
                 password: document.getElementById("password").value
             })

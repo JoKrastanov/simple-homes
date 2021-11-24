@@ -1,13 +1,17 @@
 package com.example.Simple_Homes.classes;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 @Entity
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "property")
 public class Property {
 
@@ -44,87 +48,21 @@ public class Property {
     @Column(name = "interior")
     private String interior;
 
-    public Property()  {}
 
-    public Property(String type, double price, Long a, String address, String postalCode, String city, int size, String dateAvailable, String description, boolean forSale, int rooms, String interior, String datePublished)
-    {
-        taken = false;
-
-        this.type = type;
-        this.price = price;
-        this.publisherId = a;
-        this.address = address;
-        this.postalCode = postalCode;
-        this.city = city;
-        this.size = size;
-        this.dateAvailable = dateAvailable;
-        this.description = description;
-        this.forSale = forSale;
-        this.rooms = rooms;
-        this.interior = interior;
-        this.datePublished = datePublished;
-
+    public void setAvailability(boolean available) {
+        this.taken = available;
     }
 
-
-    // Get and Set Properties
-    public Long getId() {return id;}
-    public void setId(Long id) {this.id = id;}
-
-    public String getType() {return type;}
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public Double getPrice() {return price;}
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public String getAddress() {return address;}
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getCity() {return city;}
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public Integer getSize() {return size;}
-    public void setSize(int size) {
-        this.size = size;
-    }
-
-    public String getDateAvailable() {return dateAvailable;}
-    public void setDateAvailable(String dateAvailable) {
-        this.dateAvailable = dateAvailable;
-    }
-
-    public Boolean getAvailability() {
+    public boolean getAvailability() {
         return taken;
     }
-    public void setAvailability(boolean taken) {
-        this.taken = taken;
+
+    public Long getPublisher() {
+        return publisherId;
     }
 
-    public String getDescription() {return  description;}
-    public void setDescription(String description) {this.description = description;}
-
-    public boolean getForSale() {return forSale;}
-    public void setForSale(boolean forSale) {this.forSale = forSale;}
-
-    public String getPostalCode() {return postalCode;}
-    public void setPostalCode(String postalCode) {this.postalCode = postalCode;}
-
-    public Long getPublisher() {return publisherId;}
-    public void setPublisher(Long publisher) {this.publisherId = publisher;}
-
-    public int getRooms() {return rooms;}
-    public void setRooms(int rooms) {this.rooms = rooms;}
-
-    public String getInterior() {return interior;}
-    public void setInterior(String interior) {this.interior = interior;}
-
+    public void setPublisher(Long publisher) {
+        publisherId = publisher;
+    }
 }
 

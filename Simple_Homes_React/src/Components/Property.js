@@ -3,13 +3,9 @@ import axios from "axios";
 
 import "../StyleSheets/PropertyPopUp.css";
 
-function Property(property) {
-
-    console.log(property);
-
+const Property = (property) => {
     return(
         <div className={"Property"}>
-            <h1>test</h1>
             <p>{property.id}</p>
             <p>{property.forSale ? "For Sale" : "For Rent"}: {property.type} {property.address} in {property.city}</p>
         </div>

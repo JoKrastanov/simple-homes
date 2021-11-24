@@ -1,9 +1,7 @@
 package com.example.Simple_Homes.repository.AccountRepository;
 
 import com.example.Simple_Homes.classes.Account;
-
 import com.example.Simple_Homes.intefaces.AccountInterfaces.IAccountDatabase;
-import com.example.Simple_Homes.repository.AccountRepository.IAccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -52,14 +50,8 @@ public class AccountJPA implements IAccountDatabase {
             }
         return false;
     }
-
     @Override
-    public Account logIn(String email, String password) {
-        for (Account account : loadAllAccounts()) {
-            if(account.getEmail().equals(email) && account.getPassword().equals(password)) {
-                return account;
-            }
-        }
-        return null;
-    }
+    public Account findByEmail(String email)
+    {return repo.findByEmail(email).orElse(null);}
+
 }

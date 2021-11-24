@@ -1,0 +1,10 @@
+.Register {
+    border: 3px solid black;
+    width: 50%;
+    height: 550px;
+    margin: 70px auto auto;
+    border-radius: 20px;
+}
+.container {margin-top: 30px;}
+.input{width: 200px;}
+

@@ -8,6 +8,7 @@
     min-width: 100%;
     min-height: 100%;
 }
+#home {overflow-y: hidden;}
 .NavBar-items {
     z-index: 1;
     list-style-type: none;
@@ -25,7 +26,7 @@
     float: left;
     display: inline;
     margin-top: 0px;
-    margin-left: 10px;
+    margin-left: 15px;
 }
 
 .NavBar-items li a {
@@ -37,7 +38,7 @@
 }
 
 .NavBar-items li a:hover {
-    background-color: #A239CA;
+    background-color: darkblue;
 }
 
 .NavBar-items-right {
@@ -102,19 +103,20 @@
     list-style-type: none;
     margin: 0;
     overflow: hidden;
-    background-color: #4717f6;
+    background-color: darkblue;
     font-size: 20px;
     padding: 14px 16px;
     border-radius: 5px;
 }
 
-#log-out:hover {background-color: #A239CA;}
+#log-out:hover {background-color: darkblue;}
+
 
 .NavBar-items-right-item {
     list-style-type: none;
     margin: 0;
     overflow: hidden;
-    background-color: #4717f6;
+    background-color: darkblue;
     font-size: 20px;
     border-radius: 5px;
 }

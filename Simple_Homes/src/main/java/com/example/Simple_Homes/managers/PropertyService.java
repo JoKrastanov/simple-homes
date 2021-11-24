@@ -3,14 +3,12 @@ package com.example.Simple_Homes.managers;
 import com.example.Simple_Homes.classes.Property;
 import com.example.Simple_Homes.intefaces.PropertyInterfaces.IPropertyDatabase;
 import com.example.Simple_Homes.intefaces.PropertyInterfaces.IPropertyService;
-import com.fasterxml.jackson.databind.annotation.JsonAppend;
+import com.example.Simple_Homes.requests.FilterAccountRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 @Service
 public class PropertyService implements IPropertyService {
@@ -18,8 +16,7 @@ public class PropertyService implements IPropertyService {
     @Autowired
     private IPropertyDatabase PROPERTY_DATABASE;
 
-    public PropertyService(IPropertyDatabase propertyDatabase)
-    {
+    public PropertyService(IPropertyDatabase propertyDatabase) {
         PROPERTY_DATABASE = propertyDatabase;
     }
 
@@ -49,43 +46,92 @@ public class PropertyService implements IPropertyService {
     }
 
     @Override
-    public List<Property> getPropertiesType(String type) {
-
-        List<Property> temp = new ArrayList<>();
-
-        for (Property property : getProperties()) {
-            if (property.getType().toLowerCase().replace(" ", "").contains(type.toLowerCase().replace(" ", ""))) {
-                temp.add(property);
-            }
+    public List<Property> filterProperties(FilterAccountRequest request) {
+        List<Property> filteredProperties = getProperties();
+        if (request.getLocation() != "") {
+            updateFilteredList(filteredProperties, request, 2);
         }
-        return temp;
+        if (request.getMinPrice() > 0 && request.getMaxPrice() > 1) {
+            updateFilteredList(filteredProperties, request, 1);
+        }
+        if (request.getAproxSize() > 0) {
+            updateFilteredList(filteredProperties, request, 0);
+        }
+        if (!request.getInteriors().isEmpty()) {
+            updateFilteredList(filteredProperties, request, 3);
+        }
+        if (!request.getTypes().isEmpty()) {
+            updateFilteredList(filteredProperties, request,4);
+        }
+        return filteredProperties;
     }
 
     @Override
-    public List<Property> getPropertiesAddress(String address) {
-
-        List<Property> temp = new ArrayList<>();
-
-        for (Property property : getProperties()) {
-            if (property.getAddress().toLowerCase().replace(" ", "").contains(address.toLowerCase().replace(" ", "")) || property.getCity().toLowerCase().replace(" ", "").contains(address.toLowerCase().replace(" ", "")) || property.getPostalCode().toLowerCase().replace(" ", "").contains(address.toLowerCase().replace(" ", ""))) {
-                temp.add(property);
-            }
-        }
-        return temp;
+    public List<Property> searchPropertiesByLocation(String location) {
+        List<Property> properties = getProperties();
+        properties.removeIf(property -> !property.getCity().toLowerCase().trim().startsWith(location.toLowerCase().trim())
+                && !property.getAddress().toLowerCase().trim().startsWith(location.toLowerCase().trim())
+                && !property.getPostalCode().toLowerCase().trim().startsWith(location.toLowerCase().trim()));
+        return properties;
     }
 
-    @Override
-    public List<Property> getPropertiesTypeAndAddress(String location, String type) {
-
+        //region Additional Methods
+    private void updateFilteredList(List<Property> properties, FilterAccountRequest request, int filterType) {
         List<Property> temp = new ArrayList<>();
-
-        for (Property property : getProperties()) {
-            if (property.getAddress().toLowerCase().replace(" ", "").contains(location.toLowerCase().replace(" ", "")) || property.getCity().toLowerCase().replace(" ", "").contains(location.toLowerCase().replace(" ", "")) || property.getPostalCode().toLowerCase().replace(" ", "").contains(location.toLowerCase().replace(" ", ""))) {
-                if (property.getType().toLowerCase().replace(" ", "").contains(type.toLowerCase().replace(" ", ""))) {
-                    temp.add(property);
-                }
-            }
+        switch (filterType)
+        {
+            case 0:
+                temp.addAll(properties);
+                properties.clear();
+                properties.addAll(filterSize(temp, request));
+                break;
+            case 1:
+                temp.addAll(properties);
+                properties.clear();
+                properties.addAll(filterPrice(temp, request));
+                break;
+            case 2:
+                temp.addAll(properties);
+                properties.clear();
+                properties.addAll(filterLocation(temp, request));
+                break;
+            case 3:
+                temp.addAll(properties);
+                properties.clear();
+                properties.addAll(filterInterior(temp, request));
+                break;
+            case 4:
+                temp.addAll(properties);
+                properties.clear();
+                properties.addAll(filterType(temp, request));
+                break;
         }
-        return temp;
     }
+
+    private List<Property> filterLocation(List<Property> properties, FilterAccountRequest request) {
+        properties.removeIf(property -> !property.getCity().toLowerCase().trim().contains(request.getLocation().toLowerCase().trim())
+        && !property.getAddress().toLowerCase().trim().contains(request.getLocation().toLowerCase().trim())
+        && !property.getPostalCode().toLowerCase().trim().contains(request.getLocation().toLowerCase().trim()));
+        return properties;
+    }
+    private List<Property> filterPrice(List<Property> properties, FilterAccountRequest request) {
+        properties.removeIf(property -> property.getPrice() < request.getMinPrice() || property.getPrice() > request.getMaxPrice());
+        return properties;
+    }
+    private List<Property> filterSize(List<Property> properties, FilterAccountRequest request) {
+        double maxSize = request.getAproxSize() + 3;
+        double minSize = request.getAproxSize() - 3;
+        properties.removeIf(property -> property.getSize() > maxSize || property.getSize() < minSize);
+        return properties;
+    }
+    private List<Property> filterInterior(List<Property> properties, FilterAccountRequest request) {
+        properties.removeIf(property -> !request.getInteriors().contains(property.getInterior()));
+        return properties;
+    }
+    private List<Property> filterType(List<Property> properties, FilterAccountRequest request) {
+        properties.removeIf(property -> !request.getTypes().contains(property.getType()));
+        return properties;
+    }
+//endregion
 }
+

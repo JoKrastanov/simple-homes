@@ -1,7 +1,8 @@
+body {overflow-x: hidden;}
 .properties-filters {
-    margin: 5px auto;
-    width: 97%;
-    border: 2px black solid;
+    width: 100%;
+    border-bottom: 2px black solid;
+    background-color: rgb(20,20,20);
 }
 #property-button {
     background-color: transparent;

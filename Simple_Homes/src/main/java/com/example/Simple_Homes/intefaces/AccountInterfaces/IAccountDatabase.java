@@ -10,5 +10,5 @@ public interface IAccountDatabase {
     void deleteAccount(Long id);
     void createAccount(Account acc);
     boolean updateAccount(Account acc);
-    Account logIn(String email, String password);
+    Account findByEmail(String email);
 }

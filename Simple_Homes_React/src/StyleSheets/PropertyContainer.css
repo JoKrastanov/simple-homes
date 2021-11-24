@@ -7,6 +7,7 @@
     min-width: 440px;
     background-color: whitesmoke;
     margin: 10px auto 10px;
+    border-radius: 20px;
 }
 .property-container-header {
     color: darkblue;
@@ -71,5 +72,6 @@
 }
 #image {
     object-fit: fill;
+    height: 110%;
 }
 

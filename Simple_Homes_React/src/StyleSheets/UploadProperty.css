@@ -1,0 +1,49 @@
+
+
+.upload {
+    border: 2px solid black;
+    margin-top: 60px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    border-radius: 10px;
+}
+input {
+    border-radius: 10px;
+}
+textarea {border-radius: 10px}
+.main-info {
+    margin-top: 20px;
+    display: inline-flex;
+}
+.additional {
+    display: inline-flex;
+    padding: 20px;
+}
+.additional-type {
+    margin-right: 50px;
+    border: 2px solid;
+    border-radius: 10px;
+}
+.additional-interior {
+    margin-right: 50px;
+    border: 2px solid ;
+    border-radius: 10px;
+}
+.location-details {
+    margin: auto;
+    width: 500px;
+    display: inline-flex;
+}
+.location {
+   padding-right: 20px;
+}
+.details {
+    padding-right: 20px;
+    width: 200px;
+}
+#submit-button {
+    width: 500px;
+    background-color: darkblue;
+    border-radius: 10px;
+}

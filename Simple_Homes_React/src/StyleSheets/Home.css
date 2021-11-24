@@ -1,6 +1,9 @@
+
 .home {
     width: 60%;
-    height: 500px;
-    margin: 100px auto auto;
-    border: black 1px solid;
+    height: 600px;
+    margin: 50px auto auto;
+    border: black 2px solid;
+    border-radius: 10px;
+    overflow-y: auto;
 }

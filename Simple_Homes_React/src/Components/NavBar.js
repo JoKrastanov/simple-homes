@@ -1,5 +1,4 @@
 import React from 'react';
-
 import Overview from "./Overview";
 import Properties from "./Properties"
 import LogIn from "./LogIn";
@@ -20,37 +19,26 @@ import {
     Route,
     Link,
 } from "react-router-dom";
+import {useCookies} from "react-cookie";
+import UploadProperty from "./UploadProperty";
 
-import {
-    Dropdown,
-    DropdownToggle,
-    DropdownMenu,
-    DropdownItem
-} from "reactstrap";
 
 
 export default function NavBar() {
 
-    const [loggedIn, setLoggedIn] = useState(false);
+    const[cookie, setCookie] = useCookies();
 
-    const logIn = () => {
-        setLoggedIn(true);
+    const logIn = (token, user) => {
+        setCookie("authToken", token)
+        setCookie("user", user)
     }
     const logOut = () => {
-        setLoggedIn(false);
-    }
-
-
-    const onMouseEnter = () => {
-        document.getElementById("menu").style.visibility = "visible";
-    }
-
-    const onMouseLeave = () => {
-        document.getElementById("menu").style.visibility = "hidden";
+        setCookie("authToken", "")
+        setCookie("user", 0)
     }
 
     const isLoggedIn = () => {
-        if (loggedIn) {
+        if (cookie.authToken != "") {
             return (
                 <div>
                     <li>
@@ -91,46 +79,35 @@ export default function NavBar() {
                             <Link to="/Home">Home</Link>
                         </li>
                         <li>
-                            <Dropdown onMouseOver={onMouseEnter} onMouseLeave={onMouseLeave}>
-                                <DropdownToggle className={"drop-down"}>
-                                    <Link
-                                        className={"drop-down"}
-                                        to="/Properties">Properties</Link>
-                                </DropdownToggle>
-                                <DropdownMenu id={"menu"} className={"drop-down-menu"}>
-                                    <DropdownItem className={"drop-down-item"}>Rent</DropdownItem>
-                                    <DropdownItem className={"drop-down-item"}>Buy</DropdownItem>
-                                </DropdownMenu>
-                            </Dropdown>
+                            <Link
+                                className={"drop-down"}
+                                to="/Properties">Properties</Link>
                         </li>
                         <li>
-                            <Link to="/Overview">Upload a property</Link>
-                        </li>
-                        <li>
-                            <Link to="/Overview">Users(For development)</Link>
+                            <Link to="/Upload">Upload a property</Link>
                         </li>
                         <div className={"NavBar-items-right"}>
                             {isLoggedIn()}
                         </div>
                     </ul>
                     <Switch>
-                        <Route path="/Overview">
-                            <Overview/>
+                        <Route path="/Upload">
+                            <UploadProperty token = {cookie.authToken} user = {cookie.user}/>
                         </Route>
                         <Route path="/Properties">
-                            <Properties/>
+                            <Properties token = {cookie.authToken} user = {cookie.user}/>
                         </Route>
                         <Route path="/LogIn">
-                            <LogIn loggedIn = {loggedIn} onChange={logIn}/>
+                            <LogIn loggedIn = {cookie} onChange={logIn}/>
                         </Route>
                         <Route path="/Profile">
-                            <Profile/>
+                            <Profile token = {cookie.authToken} user = {cookie.user}/>
                         </Route>
                         <Route path="/Register">
                             <Register/>
                         </Route>
                         <Route path="/Home">
-                            <Home/>
+                            <Home token = {cookie.authToken} user = {cookie.user}/>
                         </Route>
                     </Switch>
                 </div>
@@ -140,4 +117,8 @@ export default function NavBar() {
             </div>
         </div>
     );
+
+
+
+
 }

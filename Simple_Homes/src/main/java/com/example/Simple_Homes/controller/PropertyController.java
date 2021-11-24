@@ -1,9 +1,8 @@
 package com.example.Simple_Homes.controller;
 
-import com.example.Simple_Homes.classes.Account;
 import com.example.Simple_Homes.classes.Property;
 import com.example.Simple_Homes.intefaces.PropertyInterfaces.IPropertyService;
-
+import com.example.Simple_Homes.requests.FilterAccountRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,10 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 
@@ -78,48 +74,22 @@ public class PropertyController {
         }
         else {return new ResponseEntity("Please provide a valid id.", HttpStatus.NOT_FOUND);}
     }
-
-    @CrossOrigin(origins = "http://localhost:3000")
-    @PutMapping("{id}")
-    public ResponseEntity<Property> updateProperty(@PathVariable("id") Long id, @RequestParam("type") String type, @RequestParam("price") double price, @RequestParam("address") String address, @RequestParam("postalCode") String postalCode, @RequestParam("city") String city, @RequestParam("size") int size, @RequestParam("DateAvailable") String dateAvailable, @RequestParam("Availability") boolean available, @RequestParam("description") String description, @RequestParam("publisher")Account publisher, @RequestParam("forSale") boolean forSale, @RequestParam("rooms") int rooms, @RequestParam("interior") String interior)
-    {
-        Property property = PROPERTY_MANAGER.getProperty(id);
-        if (property == null)
-        {return new ResponseEntity("Property ID is invalid", HttpStatus.NOT_FOUND);}
-        else {
-            property.setAddress(address);
-            property.setAvailability(available);
-            property.setCity(city);
-            property.setPrice(price);
-            property.setSize(size);
-            property.setDateAvailable(dateAvailable);
-            property.setType(type);
-            property.setDescription(description);
-            property.setPublisher(publisher.getId());
-            property.setForSale(forSale);
-            property.setPostalCode(postalCode);
-            property.setInterior(interior);
-            property.setRooms(rooms);
-
-            return ResponseEntity.noContent().build();
-        }
-    }
     
-//    @CrossOrigin("http://localhost:3000")
-//    @GetMapping
-//    public ResponseEntity<List<Property>> getPropertiesType(@RequestParam("type") String type) {
-//        List<Property> properties = PROPERTY_MANAGER.getPropertiesType(type);
-//        if (properties != null)
-//        {return ResponseEntity.ok().body(properties);}
-//        else {return ResponseEntity.notFound().build();}
-//    }
-//
-//    @CrossOrigin("http://localhost:3000")
-//    @GetMapping
-//    public ResponseEntity<List<Property>> getPropertiesAddress(@RequestParam("address") String address) {
-//        List<Property> properties = PROPERTY_MANAGER.getPropertiesAddress(address);
-//        if (properties != null)
-//        {return ResponseEntity.ok().body(properties);}
-//        else {return ResponseEntity.notFound().build();}
-//    }
+    @CrossOrigin("http://localhost:3000")
+    @GetMapping("/filter")
+    public ResponseEntity<List<Property>> getPropertiesType(@RequestBody FilterAccountRequest request) {
+        List<Property> properties = PROPERTY_MANAGER.filterProperties(request);
+        if (properties != null)
+        {return ResponseEntity.ok().body(properties);}
+        else {return ResponseEntity.notFound().build();}
+    }
+
+    @CrossOrigin("http://localhost:3000")
+    @GetMapping("/search/{location}")
+    public ResponseEntity<List<Property>> searchPropertiesByLocation(@PathVariable String location) {
+        List<Property> properties = PROPERTY_MANAGER.searchPropertiesByLocation(location);
+        if (properties != null)
+        {return ResponseEntity.ok().body(properties);}
+        else {return ResponseEntity.notFound().build();}
+    }
 }

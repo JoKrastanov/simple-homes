@@ -1,39 +1,74 @@
 package com.example.Simple_Homes.managers;
 
+import com.example.Simple_Homes.requests.AccountCreateRequest;
 import com.example.Simple_Homes.classes.Account;
 import com.example.Simple_Homes.intefaces.AccountInterfaces.IAccountDatabase;
 import com.example.Simple_Homes.intefaces.AccountInterfaces.IAccountService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class AccountService implements IAccountService {
 
-    private IAccountDatabase ACCOUNT_DATABASE;
+    private final IAccountDatabase ACCOUNT_DATABASE;
+    private final BCryptPasswordEncoder passwordEncoder;
 
-    @Autowired
-    public AccountService(IAccountDatabase accountDatabase)
-    {
-        ACCOUNT_DATABASE = accountDatabase;
+
+    @Override
+    public List<Account> getAccounts() {
+        return ACCOUNT_DATABASE.loadAllAccounts();
     }
 
     @Override
-    public List<Account> getAccounts() {return ACCOUNT_DATABASE.loadAllAccounts();}
+    public Account getAccount(Long id) {
+        return ACCOUNT_DATABASE.loadAccount(id);
+    }
 
     @Override
-    public Account getAccount(Long id) {return  ACCOUNT_DATABASE.loadAccount(id);}
+    public void removeAccount(Long id) {
+        ACCOUNT_DATABASE.deleteAccount(id);
+    }
 
     @Override
-    public void removeAccount(Long id) {ACCOUNT_DATABASE.deleteAccount(id);}
+    public void addAccount(AccountCreateRequest request) {
+        Account user = new Account();
+
+        Optional<Account> byEmail = Optional.ofNullable(ACCOUNT_DATABASE.findByEmail(request.getUsername()));
+        if (byEmail.isPresent()) {
+            throw new RuntimeException("User already registered. Please use different username.");
+        }
+        user.setEmail(request.getUsername());
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
+        user.setPhoneNumber(request.getPhoneNumber());
+        user.setName(request.getName());
+        ACCOUNT_DATABASE.createAccount(user);
+    }
 
     @Override
-    public void addAccount(Account account) {ACCOUNT_DATABASE.createAccount(account);}
+    public boolean updateAccount(Account account) {
+        String password = passwordEncoder.encode(account.getPassword());
+        account.setPassword(password);
+        return ACCOUNT_DATABASE.updateAccount(account);
+    }
 
     @Override
-    public boolean updateAccount(Account account) {return ACCOUNT_DATABASE.updateAccount(account);}
+    public Account findByEmail(String email) {
+        return ACCOUNT_DATABASE.findByEmail(email);
+    }
 
     @Override
-    public Account logInAccount(String email, String password) {return  ACCOUNT_DATABASE.logIn(email, password);}
+    public Account logInAccount(String email, String password) {
+        List<Account> accounts = getAccounts();
+        for (Account account : accounts) {
+            if (account.getEmail().equals(email) && passwordEncoder.matches(password, account.getPassword())) {
+                return account;
+            }
+        }
+        return null;
+    }
 }

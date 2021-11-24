@@ -5,8 +5,9 @@ import "../StyleSheets/Properties.css";
 import PropertyContainer from "./PropertyContainer";
 
 import PropertyFilters from "./PropertyFilters";
-import {Link, Route, Router, Switch} from "react-router-dom";
+import {Link, Route, Switch, BrowserRouter} from "react-router-dom";
 import Property from "./Property";
+import ViewProperty from "./ViewProperty";
 
 
 const Properties = () => {
@@ -30,12 +31,20 @@ const Properties = () => {
                 <PropertyFilters/>
             </div>
             <div className={"properties-containers"}>
-                    {post.map(p => (
-                        <div>
+                {post.map(p => (
+                    <div>
+                        <BrowserRouter>
                             <Link to="/Property"><PropertyContainer key={p.id} {...p}/></Link>
-                        </div>
+                            <Switch>
+                                <Route path="/Property">
+                                    <Property key={p.id} {...p}/>
+
+                                </Route>
+                            </Switch>
+                        </BrowserRouter>
+                    </div>
                     ))}
-            </div>
+            < /div>
         </div>
     )
 }
