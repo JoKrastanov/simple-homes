@@ -1,7 +1,7 @@
 package com.example.Simple_Homes.controller;
 
 import com.example.Simple_Homes.classes.Account;
-import com.example.Simple_Homes.intefaces.AccountInterfaces.IAccountService;
+import com.example.Simple_Homes.managers.AccountService.AccountServiceInterfaces.IAccountService;
 import com.example.Simple_Homes.requests.AccountCreateRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

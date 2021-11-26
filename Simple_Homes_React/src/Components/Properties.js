@@ -38,7 +38,6 @@ const Properties = () => {
                             <Switch>
                                 <Route path="/Property">
                                     <Property key={p.id} {...p}/>
-
                                 </Route>
                             </Switch>
                         </BrowserRouter>

@@ -1,14 +1,8 @@
-package com.example.Simple_Homes;
+package com.example.Simple_Homes.UnitTests;
 
 import com.example.Simple_Homes.classes.Account;
-import com.example.Simple_Homes.controller.AccountController;
-import com.example.Simple_Homes.intefaces.AccountInterfaces.IAccountService;
-import com.example.Simple_Homes.managers.AccountService;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
-import org.mockito.internal.matchers.Equals;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.Assert;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -18,13 +12,12 @@ public class AccountTest {
     private String DEFAULT_EMAIL = "johnsmith@gmail.com";
     private String DEFAULT_PHONE = "+31012345678";
     private String DEFAULT_PASSWORD = "password";
-    private Account Test_Account = new Account(DEFAULT_NAME, DEFAULT_EMAIL, DEFAULT_PHONE, DEFAULT_PASSWORD);
+    private Account Test_Account = new Account(1L ,DEFAULT_PASSWORD, DEFAULT_NAME, DEFAULT_EMAIL, DEFAULT_PHONE);
 
     @Test
     public void AccountCreationSuccessfulTest()
     {
-        Account account = new Account(DEFAULT_NAME, DEFAULT_EMAIL, DEFAULT_PHONE, DEFAULT_PASSWORD);
-
+        Account account = new Account(1L ,DEFAULT_PASSWORD, DEFAULT_NAME, DEFAULT_EMAIL, DEFAULT_PHONE);
 
         assertEquals(DEFAULT_NAME, account.getName());
         assertEquals(DEFAULT_EMAIL, account.getEmail());

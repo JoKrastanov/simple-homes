@@ -1,8 +1,8 @@
-package com.example.Simple_Homes.managers;
+package com.example.Simple_Homes.managers.PropertyService;
 
 import com.example.Simple_Homes.classes.Property;
-import com.example.Simple_Homes.intefaces.PropertyInterfaces.IPropertyDatabase;
-import com.example.Simple_Homes.intefaces.PropertyInterfaces.IPropertyService;
+import com.example.Simple_Homes.managers.PropertyService.PropertyServiceInterfaces.IPropertyService;
+import com.example.Simple_Homes.repository.PropertyRepository.PropertyRepositoryInterfaces.IPropertyDatabase;
 import com.example.Simple_Homes.requests.FilterAccountRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

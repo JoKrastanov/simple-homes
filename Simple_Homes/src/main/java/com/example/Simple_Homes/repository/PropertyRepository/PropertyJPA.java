@@ -1,8 +1,8 @@
 package com.example.Simple_Homes.repository.PropertyRepository;
 
 import com.example.Simple_Homes.classes.Property;
-import com.example.Simple_Homes.intefaces.PropertyInterfaces.IPropertyDatabase;
-import com.example.Simple_Homes.repository.PropertyRepository.IPropertyRepository;
+import com.example.Simple_Homes.repository.PropertyRepository.PropertyRepositoryInterfaces.IPropertyDatabase;
+import com.example.Simple_Homes.repository.PropertyRepository.PropertyRepositoryInterfaces.IPropertyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

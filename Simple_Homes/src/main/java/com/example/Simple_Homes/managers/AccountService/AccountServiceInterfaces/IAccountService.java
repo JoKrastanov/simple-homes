@@ -1,4 +1,4 @@
-package com.example.Simple_Homes.intefaces.AccountInterfaces;
+package com.example.Simple_Homes.managers.AccountService.AccountServiceInterfaces;
 
 import com.example.Simple_Homes.requests.AccountCreateRequest;
 import com.example.Simple_Homes.classes.Account;

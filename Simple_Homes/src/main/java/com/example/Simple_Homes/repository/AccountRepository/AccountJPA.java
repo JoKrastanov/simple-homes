@@ -1,7 +1,8 @@
 package com.example.Simple_Homes.repository.AccountRepository;
 
 import com.example.Simple_Homes.classes.Account;
-import com.example.Simple_Homes.intefaces.AccountInterfaces.IAccountDatabase;
+import com.example.Simple_Homes.repository.AccountRepository.AccountRepositoryInterfaces.IAccountDatabase;
+import com.example.Simple_Homes.repository.AccountRepository.AccountRepositoryInterfaces.IAccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

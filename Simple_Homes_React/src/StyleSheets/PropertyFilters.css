@@ -25,6 +25,4 @@
     background-color: darkblue;
     font-size: 18px;
 }
-.PropertyFilters-price-menu {
-display: none;
-}
+.price-filter{visibility: hidden;}

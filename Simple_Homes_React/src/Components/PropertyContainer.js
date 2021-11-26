@@ -25,9 +25,6 @@ function PropertyContainer(p) {
                 <div className={"property-container-additional-details"}>
                     <p>{p.size}m² • {p.rooms} • {p.interior}</p>
                 </div>
-                <div className={"property-container-publisher"}>
-                    <p>{p.publisher.name}</p>
-                </div>
             </div>
         </div>
     );

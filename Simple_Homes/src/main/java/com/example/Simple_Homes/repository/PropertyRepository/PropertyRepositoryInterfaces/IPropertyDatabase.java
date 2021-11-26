@@ -1,8 +1,6 @@
-package com.example.Simple_Homes.intefaces.PropertyInterfaces;
+package com.example.Simple_Homes.repository.PropertyRepository.PropertyRepositoryInterfaces;
 
-import com.example.Simple_Homes.classes.Account;
 import com.example.Simple_Homes.classes.Property;
-import com.fasterxml.jackson.databind.annotation.JsonAppend;
 
 import java.util.List;
 

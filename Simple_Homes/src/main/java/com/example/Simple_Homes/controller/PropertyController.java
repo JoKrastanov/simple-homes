@@ -1,7 +1,7 @@
 package com.example.Simple_Homes.controller;
 
 import com.example.Simple_Homes.classes.Property;
-import com.example.Simple_Homes.intefaces.PropertyInterfaces.IPropertyService;
+import com.example.Simple_Homes.managers.PropertyService.PropertyServiceInterfaces.IPropertyService;
 import com.example.Simple_Homes.requests.FilterAccountRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

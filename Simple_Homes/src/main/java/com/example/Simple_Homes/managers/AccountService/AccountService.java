@@ -1,9 +1,9 @@
-package com.example.Simple_Homes.managers;
+package com.example.Simple_Homes.managers.AccountService;
 
+import com.example.Simple_Homes.managers.AccountService.AccountServiceInterfaces.IAccountService;
 import com.example.Simple_Homes.requests.AccountCreateRequest;
 import com.example.Simple_Homes.classes.Account;
-import com.example.Simple_Homes.intefaces.AccountInterfaces.IAccountDatabase;
-import com.example.Simple_Homes.intefaces.AccountInterfaces.IAccountService;
+import com.example.Simple_Homes.repository.AccountRepository.AccountRepositoryInterfaces.IAccountDatabase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;

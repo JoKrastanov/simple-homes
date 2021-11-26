@@ -1,4 +1,4 @@
-package com.example.Simple_Homes.repository.AccountRepository;
+package com.example.Simple_Homes.repository.AccountRepository.AccountRepositoryInterfaces;
 
 import com.example.Simple_Homes.classes.Account;
 import org.springframework.data.jpa.repository.JpaRepository;

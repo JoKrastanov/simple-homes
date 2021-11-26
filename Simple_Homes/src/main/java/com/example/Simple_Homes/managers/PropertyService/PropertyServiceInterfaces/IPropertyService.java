@@ -1,4 +1,4 @@
-package com.example.Simple_Homes.intefaces.PropertyInterfaces;
+package com.example.Simple_Homes.managers.PropertyService.PropertyServiceInterfaces;
 
 import com.example.Simple_Homes.classes.Property;
 import com.example.Simple_Homes.requests.FilterAccountRequest;
