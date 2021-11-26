@@ -1,0 +1,4 @@
+The only functionalities left
+are the viewing of individual
+properties, scheduling a viewing
+and bookmarking properties which are connected to the E-mail service
