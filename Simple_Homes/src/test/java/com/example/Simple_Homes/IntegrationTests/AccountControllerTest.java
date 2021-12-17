@@ -1,4 +1,4 @@
-package com.example.Simple_Homes.IntegrationTests;
+package com.example.simple_homes.IntegrationTests;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,9 +1,9 @@
-package com.example.Simple_Homes.controller;
+package com.example.simple_homes.controller;
 
-import com.example.Simple_Homes.classes.Account;
-import com.example.Simple_Homes.managers.AccountService.AccountServiceInterfaces.IAccountService;
-import com.example.Simple_Homes.requests.AccountCreateRequest;
-import com.example.Simple_Homes.requests.AccountDTO;
+import com.example.simple_homes.classes.Account;
+import com.example.simple_homes.managers.account_service.account_service_interfaces.IAccountService;
+import com.example.simple_homes.requests.AccountCreateRequest;
+import com.example.simple_homes.requests.AccountDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,12 +18,12 @@ import java.util.List;
 @RequestMapping("/accounts")
 public class AccountController {
 
-    private final IAccountService ACCOUNT_MANAGER;
+    private final IAccountService accountManager;
 
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("{id}")
     public ResponseEntity<AccountDTO> getAccountPath(@PathVariable(value = "id") Long id) {
-        AccountDTO account = ACCOUNT_MANAGER.getAccount(id);
+        AccountDTO account = accountManager.getAccount(id);
 
         if (account != null) {
             return ResponseEntity.ok().body(account);
@@ -35,7 +35,7 @@ public class AccountController {
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping
     public ResponseEntity<List<AccountDTO>> getAllAccounts() {
-        List<AccountDTO> accounts = ACCOUNT_MANAGER.getAccounts();
+        List<AccountDTO> accounts = accountManager.getAccounts();
         if (accounts != null) {
             return ResponseEntity.ok().body(accounts);
         } else {
@@ -46,7 +46,7 @@ public class AccountController {
     @CrossOrigin(origins = "http://localhost:3000")
     @DeleteMapping("{id}")
     public ResponseEntity deleteAccount(@PathVariable Long id) {
-        ACCOUNT_MANAGER.removeAccount(id);
+        accountManager.removeAccount(id);
         return ResponseEntity.ok().build();
     }
 
@@ -54,14 +54,14 @@ public class AccountController {
     @PostMapping
     public ResponseEntity<Account> createAccount(@RequestBody AccountCreateRequest request) {
 
-        ACCOUNT_MANAGER.addAccount(request);
+        accountManager.addAccount(request);
         return ResponseEntity.ok().build();
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PutMapping()
-    public ResponseEntity<Account> updateAccount(@RequestBody Account account) {
-        if (ACCOUNT_MANAGER.updateAccount(account)) {
+    public ResponseEntity<AccountDTO> updateAccount(@RequestBody Account account) {
+        if (accountManager.updateAccount(account)) {
             return ResponseEntity.noContent().build();
         } else {
             return new ResponseEntity("Please provide a valid id.", HttpStatus.NOT_FOUND);
@@ -69,26 +69,10 @@ public class AccountController {
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
-    @PutMapping("{id}")
-    public ResponseEntity<AccountDTO> updateAccount(@PathVariable("id") Long id, @RequestParam("name") String name, @RequestParam("email") String email, @RequestParam("phoneNumber") String phoneNumber, @RequestParam("password") String password) {
-        AccountDTO account = ACCOUNT_MANAGER.getAccount(id);
-        if (account == null) {
-            return new ResponseEntity("Account ID is invalid", HttpStatus.NOT_FOUND);
-        } else {
-            account.setName(name);
-            account.setEmail(email);
-            account.setPhoneNumber(phoneNumber);
-            //account.setPassword(password);
-
-            return ResponseEntity.noContent().build();
-        }
-    }
-
-    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/login")
     public ResponseEntity<AccountDTO> getLoggedInAccount(@RequestParam(value = "email") String email, @RequestParam(value = "password") String password)
     {
-        AccountDTO account = ACCOUNT_MANAGER.logInAccount(email, password);
+        AccountDTO account = accountManager.logInAccount(email, password);
 
         if (account != null) {
             return ResponseEntity.ok().body(account);

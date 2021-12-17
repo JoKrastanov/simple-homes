@@ -1,12 +1,12 @@
-package com.example.Simple_Homes.UnitTests.ModelTests;
+package com.example.simple_homes.UnitTests.ModelTests;
 
-import com.example.Simple_Homes.classes.Account;
+import com.example.simple_homes.classes.Account;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class AccountTest {
+class AccountTest {
 
     private String DEFAULT_NAME = "John Smith";
     private String DEFAULT_EMAIL = "johnsmith@gmail.com";
@@ -15,7 +15,7 @@ public class AccountTest {
     private Account Test_Account = new Account(1L ,DEFAULT_PASSWORD, DEFAULT_NAME, DEFAULT_EMAIL, DEFAULT_PHONE);
 
     @Test
-    public void AccountCreationSuccessfulTest()
+    void AccountCreationSuccessfulTest()
     {
         Account account = new Account(1L ,DEFAULT_PASSWORD, DEFAULT_NAME, DEFAULT_EMAIL, DEFAULT_PHONE);
 
@@ -25,7 +25,7 @@ public class AccountTest {
     }
 
     @Test
-    public void SetNameTestSuccessful()
+    void SetNameTestSuccessful()
     {
         String newName = "Nickolas Johnson";
         Test_Account.setName(newName);
@@ -33,7 +33,7 @@ public class AccountTest {
         assertEquals(Test_Account.getName(), newName);
     }
     @Test
-    public void SetNameTestUnsuccessful()
+    void SetNameTestUnsuccessful()
     {
         String newName = "Nickolas Johnson";
         Test_Account.setName(newName);
@@ -42,7 +42,7 @@ public class AccountTest {
     }
 
     @Test
-    public void SetPasswordTestSuccessful()
+    void SetPasswordTestSuccessful()
     {
         String newPassword = "password1";
         Test_Account.setPassword(newPassword);
@@ -50,7 +50,7 @@ public class AccountTest {
         assertEquals(Test_Account.getPassword(), newPassword);
     }
     @Test
-    public void SetPasswordTestUnsuccessful()
+    void SetPasswordTestUnsuccessful()
     {
         String newPassword = "password1";
         Test_Account.setPassword(newPassword);
@@ -59,7 +59,7 @@ public class AccountTest {
     }
 
     @Test
-    public void SetEmailTestSuccessful()
+    void SetEmailTestSuccessful()
     {
         String newEmail = "mail@mail.com";
         Test_Account.setEmail(newEmail);
@@ -67,7 +67,7 @@ public class AccountTest {
         assertEquals(Test_Account.getEmail(), newEmail);
     }
     @Test
-    public void SetEmailTestUnsuccessful()
+    void SetEmailTestUnsuccessful()
     {
         String newEmail = "mail@mail.com";
         Test_Account.setEmail(newEmail);

@@ -1,10 +1,10 @@
-package com.example.Simple_Homes.managers.AccountService;
+package com.example.simple_homes.managers.account_service;
 
-import com.example.Simple_Homes.classes.Account;
-import com.example.Simple_Homes.managers.AccountService.AccountServiceInterfaces.IAccountService;
-import com.example.Simple_Homes.repository.AccountRepository.AccountRepositoryInterfaces.IAccountDatabase;
-import com.example.Simple_Homes.requests.AccountCreateRequest;
-import com.example.Simple_Homes.requests.AccountDTO;
+import com.example.simple_homes.classes.Account;
+import com.example.simple_homes.managers.account_service.account_service_interfaces.IAccountService;
+import com.example.simple_homes.repository.account_repository.account_repository_interfaces.IAccountDatabase;
+import com.example.simple_homes.requests.AccountCreateRequest;
+import com.example.simple_homes.requests.AccountDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -17,14 +17,14 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class AccountService implements IAccountService {
 
-    private final IAccountDatabase ACCOUNT_DATABASE;
+    private final IAccountDatabase accountDatabase;
     private final BCryptPasswordEncoder passwordEncoder;
 
 
     @Override
     public List<AccountDTO> getAccounts() {
         List<AccountDTO> accountDTOS = new ArrayList<>();
-        for(Account acc : ACCOUNT_DATABASE.loadAllAccounts()) {
+        for(Account acc : accountDatabase.loadAllAccounts()) {
             accountDTOS.add(new AccountDTO(acc.getId(),acc.getName(), acc.getEmail(), acc.getPhoneNumber()));
         }
         return accountDTOS;
@@ -32,21 +32,21 @@ public class AccountService implements IAccountService {
 
     @Override
     public AccountDTO getAccount(Long id) {
-        Account acc = ACCOUNT_DATABASE.loadAccount(id);
+        Account acc = accountDatabase.loadAccount(id);
         AccountDTO dto = new AccountDTO(acc.getId(),acc.getName(), acc.getEmail(), acc.getPhoneNumber());
         return dto;
     }
 
     @Override
     public void removeAccount(Long id) {
-        ACCOUNT_DATABASE.deleteAccount(id);
+        accountDatabase.deleteAccount(id);
     }
 
     @Override
     public void addAccount(AccountCreateRequest request) {
         Account user = new Account();
 
-        Optional<Account> byEmail = Optional.ofNullable(ACCOUNT_DATABASE.findByEmail(request.getUsername()));
+        Optional<Account> byEmail = Optional.ofNullable(accountDatabase.findByEmail(request.getUsername()));
         if (byEmail.isPresent()) {
             throw new RuntimeException("User already registered. Please use different username.");
         }
@@ -54,19 +54,19 @@ public class AccountService implements IAccountService {
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setPhoneNumber(request.getPhoneNumber());
         user.setName(request.getName());
-        ACCOUNT_DATABASE.createAccount(user);
+        accountDatabase.createAccount(user);
     }
 
     @Override
     public boolean updateAccount(Account account) {
         String password = passwordEncoder.encode(account.getPassword());
         account.setPassword(password);
-        return ACCOUNT_DATABASE.updateAccount(account);
+        return accountDatabase.updateAccount(account);
     }
 
     @Override
     public Account findByEmail(String email) {
-        return ACCOUNT_DATABASE.findByEmail(email);
+        return accountDatabase.findByEmail(email);
     }
 
     @Override
@@ -74,11 +74,10 @@ public class AccountService implements IAccountService {
         List<Account> accounts = getAccountsForLogIn();
         for (Account account : accounts) {
             if (account.getEmail().equals(email) && passwordEncoder.matches(password, account.getPassword())) {
-                AccountDTO dto = new AccountDTO(account.getId(),account.getName(), account.getEmail(), account.getPhoneNumber());
-                return dto;
+                return new AccountDTO(account.getId(),account.getName(), account.getEmail(), account.getPhoneNumber());
             }
         }
         return null;
     }
-    private List<Account> getAccountsForLogIn() {return ACCOUNT_DATABASE.loadAllAccounts();}
+    private List<Account> getAccountsForLogIn() {return accountDatabase.loadAllAccounts();}
 }

@@ -1,6 +1,6 @@
-package com.example.Simple_Homes.repository.ViewingRepository.ViewingRepositoryInterfaces;
+package com.example.simple_homes.repository.viewing_repository.viewing_repository_interfaces;
 
-import com.example.Simple_Homes.classes.Viewing;
+import com.example.simple_homes.classes.Viewing;
 
 import java.util.List;
 

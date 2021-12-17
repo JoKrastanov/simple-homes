@@ -1,21 +1,18 @@
-package com.example.Simple_Homes.repository.AccountRepository;
+package com.example.simple_homes.repository.account_repository;
 
-import com.example.Simple_Homes.classes.Account;
-import com.example.Simple_Homes.repository.AccountRepository.AccountRepositoryInterfaces.IAccountDatabase;
-import com.example.Simple_Homes.repository.AccountRepository.AccountRepositoryInterfaces.IAccountRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.simple_homes.classes.Account;
+import com.example.simple_homes.repository.account_repository.account_repository_interfaces.IAccountDatabase;
+import com.example.simple_homes.repository.account_repository.account_repository_interfaces.IAccountRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
+@RequiredArgsConstructor
 public class AccountJPA implements IAccountDatabase {
 
-
-    @Autowired
     IAccountRepository repo;
-
-    public AccountJPA() {}
 
     @Override
     public List<Account> loadAllAccounts() {
@@ -40,7 +37,7 @@ public class AccountJPA implements IAccountDatabase {
     @Override
     public boolean updateAccount(Account acc) {
             for (Account account : loadAllAccounts()) {
-                if (account.getId() == acc.getId()) {
+                if (account.getId().equals(acc.getId())) {
                     account.setName(acc.getName());
                     account.setEmail(acc.getEmail());
                     account.setPhoneNumber(acc.getPhoneNumber());

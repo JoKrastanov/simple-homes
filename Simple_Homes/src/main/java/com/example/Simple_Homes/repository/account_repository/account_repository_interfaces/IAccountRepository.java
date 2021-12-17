@@ -1,6 +1,6 @@
-package com.example.Simple_Homes.repository.AccountRepository.AccountRepositoryInterfaces;
+package com.example.simple_homes.repository.account_repository.account_repository_interfaces;
 
-import com.example.Simple_Homes.classes.Account;
+import com.example.simple_homes.classes.Account;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

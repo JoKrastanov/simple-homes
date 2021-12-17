@@ -1,17 +1,17 @@
-package com.example.Simple_Homes.repository.ViewingRepository;
+package com.example.simple_homes.repository.viewing_repository;
 
-import com.example.Simple_Homes.classes.Viewing;
-import com.example.Simple_Homes.repository.ViewingRepository.ViewingRepositoryInterfaces.IViewingDatabase;
-import com.example.Simple_Homes.repository.ViewingRepository.ViewingRepositoryInterfaces.IViewingRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.simple_homes.classes.Viewing;
+import com.example.simple_homes.repository.viewing_repository.viewing_repository_interfaces.IViewingDatabase;
+import com.example.simple_homes.repository.viewing_repository.viewing_repository_interfaces.IViewingRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
+@RequiredArgsConstructor
 public class ViewingJPA implements IViewingDatabase {
 
-    @Autowired
     IViewingRepository repo;
 
     @Override

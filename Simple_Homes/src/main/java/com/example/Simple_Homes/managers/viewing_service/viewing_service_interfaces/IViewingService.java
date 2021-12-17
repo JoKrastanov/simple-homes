@@ -1,6 +1,6 @@
-package com.example.Simple_Homes.managers.ViewingService.ViewingServiceInterfaces;
+package com.example.simple_homes.managers.viewing_service.viewing_service_interfaces;
 
-import com.example.Simple_Homes.classes.Viewing;
+import com.example.simple_homes.classes.Viewing;
 
 import java.util.List;
 

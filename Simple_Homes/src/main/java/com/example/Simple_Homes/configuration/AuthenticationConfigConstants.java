@@ -1,4 +1,4 @@
-package com.example.Simple_Homes.configuration;
+package com.example.simple_homes.configuration;
 
 public class AuthenticationConfigConstants {
     public static final String SECRET = "Simple_Homes_Secret";

@@ -1,4 +1,4 @@
-package com.example.Simple_Homes;
+package com.example.simple_homes;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

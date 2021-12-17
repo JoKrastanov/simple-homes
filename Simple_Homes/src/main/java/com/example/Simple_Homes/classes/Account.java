@@ -1,4 +1,4 @@
-package com.example.Simple_Homes.classes;
+package com.example.simple_homes.classes;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

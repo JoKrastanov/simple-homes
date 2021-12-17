@@ -1,54 +1,50 @@
-package com.example.Simple_Homes.managers.PropertyService;
+package com.example.simple_homes.managers.property_service;
 
-import com.example.Simple_Homes.classes.Property;
-import com.example.Simple_Homes.managers.PropertyService.PropertyServiceInterfaces.IPropertyService;
-import com.example.Simple_Homes.repository.PropertyRepository.PropertyRepositoryInterfaces.IPropertyDatabase;
-import com.example.Simple_Homes.requests.FilterAccountRequest;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.simple_homes.classes.Property;
+import com.example.simple_homes.managers.property_service.property_service_interfaces.IPropertyService;
+import com.example.simple_homes.repository.property_repository.property_repository_interfaces.IPropertyDatabase;
+import com.example.simple_homes.requests.FilterAccountRequest;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class PropertyService implements IPropertyService {
 
-    @Autowired
-    private IPropertyDatabase PROPERTY_DATABASE;
-
-    public PropertyService(IPropertyDatabase propertyDatabase) {
-        PROPERTY_DATABASE = propertyDatabase;
-    }
+    private IPropertyDatabase propertyDatabase;
 
     @Override
     public List<Property> getProperties() {
-        return PROPERTY_DATABASE.loadAllProperties();
+        return propertyDatabase.loadAllProperties();
     }
 
     @Override
     public Property getProperty(Long id) {
-        return PROPERTY_DATABASE.loadProperty(id);
+        return propertyDatabase.loadProperty(id);
     }
 
     @Override
     public boolean removeProperty(Long id) {
-        return PROPERTY_DATABASE.deleteProperty(id);
+        return propertyDatabase.deleteProperty(id);
     }
 
     @Override
     public boolean addProperty(Property property) {
-        return PROPERTY_DATABASE.createProperty(property);
+        return propertyDatabase.createProperty(property);
     }
 
     @Override
     public boolean updateProperty(Property property) {
-        return PROPERTY_DATABASE.updateProperty(property);
+        return propertyDatabase.updateProperty(property);
     }
 
     @Override
     public List<Property> filterProperties(FilterAccountRequest request) {
         List<Property> filteredProperties = getProperties();
-        if (request.getLocation() != "") {
+        if (!request.getLocation().equals("")) {
             updateFilteredList(filteredProperties, request, 2);
         }
         if (request.getMinPrice() > 0 && request.getMaxPrice() > 1) {
@@ -105,6 +101,8 @@ public class PropertyService implements IPropertyService {
                 properties.clear();
                 properties.addAll(filterType(temp, request));
                 break;
+            default:
+                break;
         }
     }
 
@@ -119,8 +117,8 @@ public class PropertyService implements IPropertyService {
         return properties;
     }
     private List<Property> filterSize(List<Property> properties, FilterAccountRequest request) {
-        double maxSize = request.getAproxSize() + 3;
-        double minSize = request.getAproxSize() - 3;
+        int maxSize = request.getAproxSize() + 3;
+        int minSize = request.getAproxSize() - 3;
         properties.removeIf(property -> property.getSize() > maxSize || property.getSize() < minSize);
         return properties;
     }

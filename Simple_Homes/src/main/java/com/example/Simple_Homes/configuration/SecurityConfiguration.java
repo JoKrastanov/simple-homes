@@ -1,8 +1,8 @@
-package com.example.Simple_Homes.configuration;
+package com.example.simple_homes.configuration;
 
-import com.example.Simple_Homes.authentication.AuthenticationAccountDetailService;
-import com.example.Simple_Homes.authentication.JWTAuthenticationFilter;
-import com.example.Simple_Homes.authentication.JWTAuthorizationFilter;
+import com.example.simple_homes.authentication.AuthenticationAccountDetailService;
+import com.example.simple_homes.authentication.JWTAuthenticationFilter;
+import com.example.simple_homes.authentication.JWTAuthorizationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -20,9 +20,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.headers().frameOptions().disable();
         http.cors().and().csrf().disable().authorizeRequests()
                 .antMatchers(HttpMethod.POST, AuthenticationConfigConstants.SIGN_UP_URL).permitAll()
-                .antMatchers("/properties/**").permitAll()
                 .antMatchers("/properties/search/**").permitAll()
                 .antMatchers("/properties/filter/**").permitAll()
+                .antMatchers("/properties/**").permitAll()
                 .antMatchers("/h2-ui/*").permitAll()
                 .antMatchers("/h2-ui").permitAll()
                 //.antMatchers("/**").permitAll()

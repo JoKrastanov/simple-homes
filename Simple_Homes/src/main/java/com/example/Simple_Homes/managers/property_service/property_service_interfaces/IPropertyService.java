@@ -1,7 +1,7 @@
-package com.example.Simple_Homes.managers.PropertyService.PropertyServiceInterfaces;
+package com.example.simple_homes.managers.property_service.property_service_interfaces;
 
-import com.example.Simple_Homes.classes.Property;
-import com.example.Simple_Homes.requests.FilterAccountRequest;
+import com.example.simple_homes.classes.Property;
+import com.example.simple_homes.requests.FilterAccountRequest;
 
 import java.util.List;
 

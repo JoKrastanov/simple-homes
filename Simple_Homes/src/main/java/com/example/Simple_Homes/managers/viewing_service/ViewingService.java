@@ -1,8 +1,8 @@
-package com.example.Simple_Homes.managers.ViewingService;
+package com.example.simple_homes.managers.viewing_service;
 
-import com.example.Simple_Homes.classes.Viewing;
-import com.example.Simple_Homes.managers.ViewingService.ViewingServiceInterfaces.IViewingService;
-import com.example.Simple_Homes.repository.ViewingRepository.ViewingRepositoryInterfaces.IViewingDatabase;
+import com.example.simple_homes.classes.Viewing;
+import com.example.simple_homes.managers.viewing_service.viewing_service_interfaces.IViewingService;
+import com.example.simple_homes.repository.viewing_repository.viewing_repository_interfaces.IViewingDatabase;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

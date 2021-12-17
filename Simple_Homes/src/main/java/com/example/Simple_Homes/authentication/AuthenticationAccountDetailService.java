@@ -1,7 +1,7 @@
-package com.example.Simple_Homes.authentication;
+package com.example.simple_homes.authentication;
 
-import com.example.Simple_Homes.classes.Account;
-import com.example.Simple_Homes.managers.AccountService.AccountService;
+import com.example.simple_homes.classes.Account;
+import com.example.simple_homes.managers.account_service.AccountService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

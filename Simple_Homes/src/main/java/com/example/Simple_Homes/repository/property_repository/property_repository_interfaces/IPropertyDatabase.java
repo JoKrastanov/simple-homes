@@ -1,6 +1,6 @@
-package com.example.Simple_Homes.repository.PropertyRepository.PropertyRepositoryInterfaces;
+package com.example.simple_homes.repository.property_repository.property_repository_interfaces;
 
-import com.example.Simple_Homes.classes.Property;
+import com.example.simple_homes.classes.Property;
 
 import java.util.List;
 

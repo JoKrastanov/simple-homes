@@ -1,8 +1,8 @@
-package com.example.Simple_Homes.managers.AccountService.AccountServiceInterfaces;
+package com.example.simple_homes.managers.account_service.account_service_interfaces;
 
-import com.example.Simple_Homes.requests.AccountCreateRequest;
-import com.example.Simple_Homes.classes.Account;
-import com.example.Simple_Homes.requests.AccountDTO;
+import com.example.simple_homes.requests.AccountCreateRequest;
+import com.example.simple_homes.classes.Account;
+import com.example.simple_homes.requests.AccountDTO;
 
 import java.util.List;
 

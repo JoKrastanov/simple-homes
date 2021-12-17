@@ -1,4 +1,4 @@
-package com.example.Simple_Homes.requests;
+package com.example.simple_homes.requests;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

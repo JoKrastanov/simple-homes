@@ -1,10 +1,10 @@
-package com.example.Simple_Homes.controller;
+package com.example.simple_homes.controller;
 
-import com.example.Simple_Homes.classes.Property;
-import com.example.Simple_Homes.classes.Viewing;
-import com.example.Simple_Homes.managers.PropertyService.PropertyServiceInterfaces.IPropertyService;
-import com.example.Simple_Homes.managers.ViewingService.ViewingServiceInterfaces.IViewingService;
-import com.example.Simple_Homes.requests.FilterAccountRequest;
+import com.example.simple_homes.classes.Property;
+import com.example.simple_homes.classes.Viewing;
+import com.example.simple_homes.managers.property_service.property_service_interfaces.IPropertyService;
+import com.example.simple_homes.managers.viewing_service.viewing_service_interfaces.IViewingService;
+import com.example.simple_homes.requests.FilterAccountRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,7 +22,7 @@ import java.util.List;
 public class PropertyController {
 
     @Autowired
-    private IPropertyService PROPERTY_MANAGER;
+    private IPropertyService propertyManager;
     @Autowired
     private IViewingService VIEWING_MANAGER;
 
@@ -31,7 +31,7 @@ public class PropertyController {
     @GetMapping("{id}")
     public ResponseEntity<Property> getPropertyPath(@PathVariable(value = "id") Long id)
     {
-        Property property = PROPERTY_MANAGER.getProperty(id);
+        Property property = propertyManager.getProperty(id);
 
         if(property != null)
         {return ResponseEntity.ok().body(property);}
@@ -41,7 +41,7 @@ public class PropertyController {
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping
     public ResponseEntity<List<Property>> getAllProperties() {
-        List<Property> properties = PROPERTY_MANAGER.getProperties();
+        List<Property> properties = propertyManager.getProperties();
         if (properties != null) {return ResponseEntity.ok().body(properties);}
         else {return ResponseEntity.notFound().build();}
     }
@@ -49,7 +49,7 @@ public class PropertyController {
     @CrossOrigin(origins = "http://localhost:3000")
     @DeleteMapping("{id}")
     public ResponseEntity deleteProperty(@PathVariable Long id) {
-        PROPERTY_MANAGER.removeProperty(id);
+        propertyManager.removeProperty(id);
         return  ResponseEntity.ok().build();
     }
 
@@ -57,7 +57,7 @@ public class PropertyController {
     @PostMapping
     public ResponseEntity<Property> createProperty(@RequestBody Property property)
     {
-        if(!PROPERTY_MANAGER.addProperty(property))
+        if(!propertyManager.addProperty(property))
         {
             String answer = "Property with ID " + property.getId() + " already exists!";
             return new ResponseEntity(answer, HttpStatus.CONFLICT);
@@ -73,7 +73,7 @@ public class PropertyController {
     @PutMapping()
     public ResponseEntity<Property> updateProperty(@RequestBody Property property)
     {
-        if(PROPERTY_MANAGER.updateProperty(property)) {
+        if(propertyManager.updateProperty(property)) {
             return ResponseEntity.noContent().build();
         }
         else {return new ResponseEntity("Please provide a valid id.", HttpStatus.NOT_FOUND);}
@@ -82,7 +82,7 @@ public class PropertyController {
     @CrossOrigin("http://localhost:3000")
     @GetMapping("/filter")
     public ResponseEntity<List<Property>> getPropertiesType(@RequestBody FilterAccountRequest request) {
-        List<Property> properties = PROPERTY_MANAGER.filterProperties(request);
+        List<Property> properties = propertyManager.filterProperties(request);
         if (properties != null)
         {return ResponseEntity.ok().body(properties);}
         else {return ResponseEntity.notFound().build();}
@@ -91,7 +91,7 @@ public class PropertyController {
     @CrossOrigin("http://localhost:3000")
     @GetMapping("/search/{location}")
     public ResponseEntity<List<Property>> searchPropertiesByLocation(@PathVariable String location) {
-        List<Property> properties = PROPERTY_MANAGER.searchPropertiesByLocation(location);
+        List<Property> properties = propertyManager.searchPropertiesByLocation(location);
         if (properties != null)
         {return ResponseEntity.ok().body(properties);}
         else {return ResponseEntity.notFound().build();}

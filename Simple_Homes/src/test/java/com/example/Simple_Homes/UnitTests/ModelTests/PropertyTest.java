@@ -1,12 +1,12 @@
-package com.example.Simple_Homes.UnitTests.ModelTests;
+package com.example.simple_homes.UnitTests.ModelTests;
 
-import com.example.Simple_Homes.classes.Property;
+import com.example.simple_homes.classes.Property;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class PropertyTest {
+class PropertyTest {
     String DEFAULT_TYPE = "Room";
     Double DEFAULT_PRICE = 400.0;
     String DEFAULT_DESCRIPTION = "desc";
@@ -22,7 +22,7 @@ public class PropertyTest {
     Property Test_Property = new Property(1L, DEFAULT_TYPE, DEFAULT_PRICE, false, DEFAULT_DESCRIPTION, forSale, DEFAULT_PUBLISHERID,DEFAULT_ADDRESS, DEFAULT_POSTACODE, DEFAULT_CITY, DEFAULT_SIZE, "2021/11/25", "2021/11/25", DEFAULT_ROOMS, DEFAULT_INTERIOR);
 
     @Test
-    public void TestConstructorSuccessful()
+    void TestConstructorSuccessful()
     {
         Property property = new Property(1L, DEFAULT_TYPE, DEFAULT_PRICE, false, DEFAULT_DESCRIPTION, forSale, DEFAULT_PUBLISHERID,DEFAULT_ADDRESS, DEFAULT_POSTACODE, DEFAULT_CITY, DEFAULT_SIZE, "2021/11/25", "2021/11/25", DEFAULT_ROOMS, DEFAULT_INTERIOR);
 
@@ -33,7 +33,7 @@ public class PropertyTest {
     }
 
     @Test
-    public void TestSetTypeSuccessful()
+    void TestSetTypeSuccessful()
     {
         String newType = "House";
         Test_Property.setType(newType);
@@ -41,7 +41,7 @@ public class PropertyTest {
         assertEquals(newType, Test_Property.getType());
     }
     @Test
-    public void TestSetTypeUnsuccessful()
+    void TestSetTypeUnsuccessful()
     {
         String newType = "House";
         Test_Property.setType(newType);
@@ -50,7 +50,7 @@ public class PropertyTest {
     }
 
     @Test
-    public void TestSetPriceSuccessful()
+    void TestSetPriceSuccessful()
     {
         Double newPrice = 500D;
         Test_Property.setPrice(newPrice);
@@ -58,7 +58,7 @@ public class PropertyTest {
         assertEquals(newPrice, Test_Property.getPrice());
     }
     @Test
-    public void TestSetPriceUnsuccessful()
+    void TestSetPriceUnsuccessful()
     {
         Double newPrice = 500D;
         Test_Property.setPrice(newPrice);
@@ -67,7 +67,7 @@ public class PropertyTest {
     }
 
     @Test
-    public void TestSetDescSuccessful()
+    void TestSetDescSuccessful()
     {
         String newDesc = "new desc";
         Test_Property.setDescription(newDesc);
@@ -75,7 +75,7 @@ public class PropertyTest {
         assertEquals(newDesc, Test_Property.getDescription());
     }
     @Test
-    public void TestSetDescUnsuccessful()
+    void TestSetDescUnsuccessful()
     {
         String newDesc = "new desc";
         Test_Property.setDescription(newDesc);
@@ -84,7 +84,7 @@ public class PropertyTest {
     }
 
     @Test
-    public void TestSetAddressSuccessful()
+    void TestSetAddressSuccessful()
     {
         String newAddress = "Johannes van der Waalsweg";
         Test_Property.setAddress(newAddress);
@@ -92,7 +92,7 @@ public class PropertyTest {
         assertEquals(newAddress, Test_Property.getAddress());
     }
     @Test
-    public void TestSetAddressUnsuccessful()
+    void TestSetAddressUnsuccessful()
     {
         String newAddress = "Johannes van der Waalsweg";
         Test_Property.setAddress(newAddress);
@@ -101,7 +101,7 @@ public class PropertyTest {
     }
 
     @Test
-    public void TestSetPostalCodeSuccessful()
+    void TestSetPostalCodeSuccessful()
     {
         String newPostalCode = "1234AB";
         Test_Property.setPostalCode(newPostalCode);
@@ -109,7 +109,7 @@ public class PropertyTest {
         assertEquals(newPostalCode, Test_Property.getPostalCode());
     }
     @Test
-    public void TestSetPostalCodeUnsuccessful()
+    void TestSetPostalCodeUnsuccessful()
     {
         String newPostalCode = "1234AB";
         Test_Property.setPostalCode(newPostalCode);
@@ -118,7 +118,7 @@ public class PropertyTest {
     }
 
     @Test
-    public void TestSetCitySuccessful()
+    void TestSetCitySuccessful()
     {
         String newCity = "Amsterdam";
         Test_Property.setCity(newCity);
@@ -126,7 +126,7 @@ public class PropertyTest {
         assertEquals(newCity, Test_Property.getCity());
     }
     @Test
-    public void TestSetCityUnsuccessful()
+    void TestSetCityUnsuccessful()
     {
         String newCity = "Amsterdam";
         Test_Property.setCity(newCity);
@@ -135,7 +135,7 @@ public class PropertyTest {
     }
 
     @Test
-    public void TestSetSizeSuccessful()
+    void TestSetSizeSuccessful()
     {
         Integer newSize = 16;
         Test_Property.setSize(newSize);
@@ -143,7 +143,7 @@ public class PropertyTest {
         assertEquals(newSize, Test_Property.getSize());
     }
     @Test
-    public void TestSetSizeUnsuccessful()
+    void TestSetSizeUnsuccessful()
     {
         Integer newSize = 16;
         Test_Property.setSize(newSize);
