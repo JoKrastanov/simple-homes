@@ -1,6 +1,7 @@
 
 
 .upload {
+    background-color: #d7d5d5;
     border: 2px solid black;
     margin-top: 60px;
     margin-left: auto;
@@ -43,6 +44,7 @@ textarea {border-radius: 10px}
     width: 200px;
 }
 #submit-button {
+    color: white;
     width: 500px;
     background-color: darkblue;
     border-radius: 10px;

@@ -1,4 +1,4 @@
-package com.example.Simple_Homes.UnitTests;
+package com.example.Simple_Homes.UnitTests.ModelTests;
 
 import com.example.Simple_Homes.classes.Account;
 import org.junit.jupiter.api.Assertions;

@@ -102,6 +102,7 @@ function UploadProperty(props) {
                 }
             });
     }
+    if(props.token === "") {return (<div>Please log in first</div>)}
     return (
         <div className={"upload"}>
             <form onSubmit={handleSubmit}>

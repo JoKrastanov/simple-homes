@@ -65,8 +65,8 @@ function LogIn(props) {
                 if (response.status === 200) {
                     user = response.data.id;
                     props.onChange(token, user);
-                    console.log(token + " " + user)
-                    history.push("/Home");
+                    history.push("/Profile");
+                    window.location.reload();
                 }
             });
     }
@@ -81,14 +81,11 @@ function LogIn(props) {
                 <label htmlFor="psw"><b>Password</b></label>
                 <input type="password" placeholder="Enter Password" name="psw" id={"password"} required/>
                 {!error ? <></> : <p id={"login-fail"}>Incorrect username or password! Please try again.</p>}
-                <button onClick={logIn}>Login</button>
+                <button id={"button"} onClick={logIn}>Login</button>
                 <label>
                     <input type="checkbox" name="remember"/> Remember me
                 </label>
                     <p>Don't have an account? <a className={"register-button"} onClick={redirectToRegister} >Register here</a></p>
-            </div>
-            <div className="container">
-                <span className="psw">Forgot <a href="#">password?</a></span>
             </div>
         </div>
     );

@@ -1,0 +1,30 @@
+.schedule {
+    background-color: lightgray;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+.schedule img {
+    width: 100px;
+    height: 100px;
+    background-color: black;
+    border-radius: 50%;
+}
+#contact-details {
+    margin: auto;
+    width: 70%;
+    font-size: small;
+}
+
+#schedule-button{
+    width: 70%;
+    margin: 10px;
+    color: white;
+}
+#contact-title{font-size: large;}
+
+.schedule-popup {
+
+
+}
+
+

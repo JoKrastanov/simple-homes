@@ -20,7 +20,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.headers().frameOptions().disable();
         http.cors().and().csrf().disable().authorizeRequests()
                 .antMatchers(HttpMethod.POST, AuthenticationConfigConstants.SIGN_UP_URL).permitAll()
-                .antMatchers("/properties").permitAll()
+                .antMatchers("/properties/**").permitAll()
                 .antMatchers("/properties/search/**").permitAll()
                 .antMatchers("/properties/filter/**").permitAll()
                 .antMatchers("/h2-ui/*").permitAll()

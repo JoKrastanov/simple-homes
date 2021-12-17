@@ -34,7 +34,7 @@ public class AccountControllerTest {
     public void TestLogInAccount() throws Exception {
         mockMvc.perform(post("http://localhost:8080/login")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"email\" : \"test\", \"password\" : \"test\"}"))
+                        .content("{\"email\" : \"test@gmail.com\", \"password\" : \"test\"}"))
                 .andExpect(status().isOk());
     }
 
@@ -100,7 +100,7 @@ public class AccountControllerTest {
     private String getToken() throws Exception {
         MvcResult MVC = mockMvc.perform(post("http://localhost:8080/login")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"email\" : \"test\", \"password\" : \"test\"}"))
+                        .content("{\"email\" : \"test@gmail.com\", \"password\" : \"test\"}"))
                 .andExpect(status().isOk())
                 .andReturn();
 

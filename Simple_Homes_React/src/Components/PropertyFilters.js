@@ -1,23 +1,27 @@
 import React, {useState, useRef} from "react";
 import "../StyleSheets/PropertyFilters.css";
-import PriceFilter from "./PriceFilter";
 
 
 function PropertyFilters() {
 
-    const [priceFilter, togglePriceFilter] = useState(false);
+    const [price, setPrice] = useState();
+    const [type, setType] = useState();
+    const [interior, setInterior] = useState();
+    const [size, setSize] = useState();
 
-    function togglePriceFilterFunction() {
-        togglePriceFilter(!priceFilter)
-        if (priceFilter) {document.getElementById("price-visible").style.visibility = "visible" ;}
-        else {document.getElementById("price-visible").style.visibility= "hidden" ;}
+
+    const updatePrice = (newPrice) => {
+        setPrice(newPrice);
+        console.log(price);
     }
+
+
 
     return (
         <div className={"PropertyFilters"}>
             <div className={"property-filter-types"}>
                 <div id={"filters"} className={"PropertyFilters-price"}>
-                    <button className={"filter-button"} >Price</button>
+                    <button className={"filter-button"}>Price</button>
                 </div>
                 <div id={"filters"} className={"PropertyFilters-type"}>
                     <button className={"filter-button"}>Type</button>
@@ -28,16 +32,13 @@ function PropertyFilters() {
                 <div id={"filters"} className={"PropertyFilters-size"}>
                     <button className={"filter-button"}>Size</button>
                 </div>
-                <div id={"filters"} className={"PropertyFilters-location"}>
-                    <input id={"tbSearch"} placeholder="Search by city , address or postcode"/>
-                    <button className={"filter-button"}>Search</button>
+                <div id={"filters"} className={"PropertyFilters-size"}>
+                    <button className={"filter-button"}>City</button>
                 </div>
             </div>
-            <div className={"property-filter-options"} id={"price-filter"}>
-                <div className={"price-filter"}>
-                    <PriceFilter/>
-                </div>
-            </div>
+{/*            <div className={"properties-filter-options"}>
+
+            </div>*/}
         </div>
     )
 }

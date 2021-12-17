@@ -1,8 +1,11 @@
 package com.example.Simple_Homes.controller;
 
 import com.example.Simple_Homes.classes.Property;
+import com.example.Simple_Homes.classes.Viewing;
 import com.example.Simple_Homes.managers.PropertyService.PropertyServiceInterfaces.IPropertyService;
+import com.example.Simple_Homes.managers.ViewingService.ViewingServiceInterfaces.IViewingService;
 import com.example.Simple_Homes.requests.FilterAccountRequest;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,15 +16,16 @@ import java.net.URI;
 import java.util.List;
 
 @Controller
-
+@AllArgsConstructor
 @RestController
 @RequestMapping("/properties")
 public class PropertyController {
 
     @Autowired
     private IPropertyService PROPERTY_MANAGER;
+    @Autowired
+    private IViewingService VIEWING_MANAGER;
 
-    public PropertyController(IPropertyService propertyManager) {PROPERTY_MANAGER = propertyManager;}
 
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("{id}")
@@ -74,7 +78,7 @@ public class PropertyController {
         }
         else {return new ResponseEntity("Please provide a valid id.", HttpStatus.NOT_FOUND);}
     }
-    
+
     @CrossOrigin("http://localhost:3000")
     @GetMapping("/filter")
     public ResponseEntity<List<Property>> getPropertiesType(@RequestBody FilterAccountRequest request) {
@@ -91,5 +95,44 @@ public class PropertyController {
         if (properties != null)
         {return ResponseEntity.ok().body(properties);}
         else {return ResponseEntity.notFound().build();}
+    }
+
+    @CrossOrigin("http://localhost:3000")
+    @PostMapping("/viewing")
+    public ResponseEntity<Viewing> createViewing(@RequestBody Viewing viewing)
+    {
+        if(VIEWING_MANAGER.createViewing(viewing))
+        {return ResponseEntity.ok().body(viewing);}
+        return ResponseEntity.notFound().build();
+    }
+
+    @CrossOrigin("http://localhost:3000")
+    @DeleteMapping("/viewing/{id}")
+    public ResponseEntity<Viewing> deleteViewing(@PathVariable Long id)
+    {
+        VIEWING_MANAGER.deleteViewing(id);
+        return ResponseEntity.ok().build();
+    }
+
+    @CrossOrigin("http://localhost:3000")
+    @GetMapping("/viewing/account/{id}")
+    public ResponseEntity<List<Viewing>> getAccountViewings(@PathVariable Long id)
+    {
+        List<Viewing> accountViewings = VIEWING_MANAGER.getAccountViewings(id);
+        if (accountViewings != null) {
+            return ResponseEntity.ok().body(accountViewings);
+        }
+        else{return ResponseEntity.notFound().build();}
+    }
+
+    @CrossOrigin("http://localhost:3000")
+    @GetMapping("/viewing/property/{id}")
+    public ResponseEntity<List<Viewing>> getPropertyViewings(@PathVariable Long id)
+    {
+        List<Viewing> propertyViewings = VIEWING_MANAGER.getPropertyViewings(id);
+        if (propertyViewings != null) {
+            return ResponseEntity.ok().body(propertyViewings);
+        }
+        else{return ResponseEntity.notFound().build();}
     }
 }

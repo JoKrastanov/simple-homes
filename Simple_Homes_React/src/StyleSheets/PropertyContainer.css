@@ -1,5 +1,6 @@
 .property-container {
     list-style-type: none;
+    text-decoration: none;
     width: 70%;
     height: 200px;
     overflow: hidden;

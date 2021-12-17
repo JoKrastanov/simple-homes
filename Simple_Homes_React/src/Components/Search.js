@@ -10,9 +10,9 @@ const SearchBar = () => {
         const [location, setLocation] = useState("");
         const [post, setPost] = useState(null);
 
-        const searchProperty = () => {
-                if(location !== "") {
-                        let finalUrl = baseURL + location;
+        const searchProperty = (e) => {
+                if(e.target.value !== "") {
+                        let finalUrl = baseURL + e.target.value;
                         axios
                             .get(finalUrl)
                             .then((response) => {
@@ -21,11 +21,7 @@ const SearchBar = () => {
                                     }
                             })
                 }
-        }
-
-        const handleSearch = (e) => {
-                setLocation(e.target.value);
-                searchProperty()
+                else {setPost("")}
         }
 
         return (
@@ -37,8 +33,7 @@ const SearchBar = () => {
                         id="header-search"
                         placeholder="Search a city, street or post code"
                         name="s"
-                        value={location}
-                        onChange={handleSearch}
+                        onChange={searchProperty}
                     />
                     <SearchResults  array={post}/>
             </div>

@@ -3,15 +3,18 @@ import axios from "axios";
 
 import image from "../Images/ActuallyEdSheeran.jpg"
 import "../StyleSheets/Profile.css";
-import {useHistory} from "react-router-dom";
+import {Link} from "react-router-dom";
+import PropertyContainer from "./PropertyContainer";
 
 const Profile = (props) => {
 
-    let authToken = props.token;
-    let userId = props.user;
+    let authToken = localStorage.getItem('authToken');
+    let userId = localStorage.getItem('user');
     const baseUrl = "http://localhost:8080/accounts/" + userId
-    let history = useHistory();
+    const viewingUrl = "http://localhost:8080/properties/viewing/account/" + userId
     const [user, setUser] = useState();
+    const [viewings, setViewings] = useState(null);
+
     useEffect(() => {
         axios
             .get(baseUrl, {
@@ -22,9 +25,23 @@ const Profile = (props) => {
             .then((response) => {
                 if (response.status === 200) {
                     setUser(response.data)
-                    console.log(baseUrl)
                 }
             });
+
+        axios
+            .get(viewingUrl, {
+                headers: {
+                    'Authorization': authToken
+                }
+            }).then((response) => {
+            if (response.status === 200) {
+                if(response.data.length > 0)
+                {
+                    setViewings(response.data)
+                }
+            }
+        })
+
     }, []);
 
 
@@ -33,14 +50,28 @@ const Profile = (props) => {
     return (
       <div className={"profile"}>
           <div className={"profile-info"}>
-              <img id={"profile-pic"} src={image}/>
-              <p>{user.name}</p>
-              <p>{user.email}</p>
-              <p>{user.phoneNumber}</p>
-              <button id={"edit-button"}>Edit Profile</button>
+              <div id={'profile-avatar'}>
+                  <img id={"profile-pic"} src={image}/>
+                  <p>{user.name}</p>
+                  <p>{user.email}</p>
+                  <p>{user.phoneNumber}</p>
+              </div>
+                  <div><button id={"edit-button"}>Edit Profile</button></div>
+                  <button id={"delete-button"}>Delete Profile</button>
+
           </div>
         <div className={"bookmarked-properties"}>
-            Bookmarks
+            <p>Upcoming Viewings</p>
+            <div id={"account-viewings"}>
+                {viewings!=  null ?
+                <div id={"viewing-container"}>
+                    {viewings.map(p => (
+                        <div className={"viewing"}>
+                            <Link class={"viewing-link"} to={`/Property/${p.propertyId}`}>{p.viewingDate.split('T')[0]}</Link>
+                        </div>
+                    ))}
+                </div> : <div className={"viewing-error"}>You do not have any upcoming viewings</div>}
+            </div>
         </div>
       </div>
     );}

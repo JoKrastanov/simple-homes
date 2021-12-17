@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
+import {Link} from "react-router-dom"
 
 import "../StyleSheets/Properties.css";
+import emailImg from "../Images/email.png";
 import PropertyContainer from "./PropertyContainer";
 
 import PropertyFilters from "./PropertyFilters";
-import {Link, Route, Switch, BrowserRouter} from "react-router-dom";
-import Property from "./Property";
-import ViewProperty from "./ViewProperty";
+
 
 
 const Properties = () => {
@@ -24,27 +24,20 @@ const Properties = () => {
         });
     }, []);
 
+
     if (!post) return null
-    return (
-        <div className={"properties"}>
-            <div className={"properties-filters"}>
-                <PropertyFilters/>
-            </div>
-            <div className={"properties-containers"}>
-                {post.map(p => (
-                    <div>
-                        <BrowserRouter>
-                            <Link to="/Property"><PropertyContainer key={p.id} {...p}/></Link>
-                            <Switch>
-                                <Route path="/Property">
-                                    <Property key={p.id} {...p}/>
-                                </Route>
-                            </Switch>
-                        </BrowserRouter>
-                    </div>
+        return (
+            <div className={"properties"}>
+                <div className={"properties-filters"}>
+                    <PropertyFilters/>
+                </div>
+                <Link to={"/"} id={"keep-me-updated"}><img id={"email-img"} src={emailImg}/>Keep me updated</Link>
+                <div className={"properties-containers"}>
+                    {post.map(p => (
+                        <PropertyContainer key={p.id} p={p}/>
                     ))}
-            < /div>
-        </div>
-    )
+                < /div>
+            </div>
+        )
 }
 export default Properties

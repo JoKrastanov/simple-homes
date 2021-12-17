@@ -9,7 +9,7 @@ const SearchResults = (props) => {
         <div>
             {props.array.map(p => (
                 <div>
-                    <Link to="/Property"><PropertyContainer key={p.id} {...p}/></Link>
+                    <PropertyContainer key={p.id} p={p}/>
                 </div>
             ))}
         </div>

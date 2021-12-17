@@ -3,8 +3,30 @@ body {overflow-x: hidden;}
     width: 100%;
     border-bottom: 2px black solid;
     background-color: rgb(20,20,20);
+    z-index: 10;
 }
 #property-button {
     background-color: transparent;
     width: 100%;
 }
+
+#email-img {
+    width: 35px;
+    height: 35px;
+    margin-top: -5px;
+    margin-right: 10px;
+}
+#keep-me-updated {
+    font-size:20px;
+    width: max-content;
+    padding: 10px;
+    height: 20px;
+    color: white;
+    border-radius: 20px;
+    background-color: darkblue;
+    display: inline-flex;
+    margin-top: 10px;
+    margin-left: 50%;
+}
+
+#keep-me-updated:hover {background-color: #1087ff}

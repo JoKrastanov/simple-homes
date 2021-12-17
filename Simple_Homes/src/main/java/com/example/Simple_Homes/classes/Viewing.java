@@ -1,11 +1,28 @@
 package com.example.Simple_Homes.classes;
 
-import java.util.Date;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+import javax.persistence.*;
+import java.time.LocalDateTime;
+
+@Entity
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name = "Viewing")
 public class Viewing {
-    private int propertyId;
-    private int accountId;
-    private Date viewingDate;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
+    private Long propertyId;
+    private Long accountId;
+    private LocalDateTime viewingDate;
 
 
 }

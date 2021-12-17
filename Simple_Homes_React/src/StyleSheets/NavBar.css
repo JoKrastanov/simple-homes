@@ -1,23 +1,28 @@
-#welcome {height: 300px;}
+.NavBar {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 5;
+}
+
 #welcomeImage {
     z-index: -2;
-    opacity: 40%;
+    opacity: 45%;
     position: fixed;
     top: 0;
     left: 0;
     min-width: 100%;
     min-height: 100%;
 }
-#home {overflow-y: hidden;}
 .NavBar-items {
-    z-index: 1;
-    list-style-type: none;
-    margin: 0;
+    z-index: 5;
+    margin :0;
     padding: 0;
+    list-style-type: none;
     overflow: hidden;
     background-color: #0E0B16;
     font-size: 20px;
-    border-bottom: 1px dimgrey solid;
+
     position: -webkit-sticky;
     position: sticky;
     top: 0;
@@ -25,7 +30,7 @@
 .NavBar-items li {
     float: left;
     display: inline;
-    margin-top: 0px;
+
     margin-left: 15px;
 }
 
@@ -51,41 +56,13 @@
     border-radius: 5px;
 }
 
+.NavBar-items-right li:hover {opacity: 0.8;}
+
 #logo {
     height: 50px;
     width: auto;
     margin: 0 50px 0 50px;
 }
-
-.drop-down {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #0E0B16;
-    font-size: 20px;
-}
-
-.drop-down-menu {
-    visibility: hidden;
-    position: absolute;
-    background-color: #0E0B16;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-}
-
-.drop-down-item{
-    list-style-type: none;
-    padding: 0;
-    overflow: hidden;
-    background-color: #0E0B16;
-    font-size: 20px;
-    display: block;
-    margin-top: 7px;
-}
-
-.drop-down-item:hover {background-color: #A239CA;}
 
 #profile-logo-img {
     object-fit: cover;
@@ -100,6 +77,7 @@
 }
 
 #log-out {
+    color:white;
     list-style-type: none;
     margin: 0;
     overflow: hidden;
