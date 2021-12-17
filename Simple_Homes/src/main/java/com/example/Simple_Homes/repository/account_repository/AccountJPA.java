@@ -3,16 +3,19 @@ package com.example.simple_homes.repository.account_repository;
 import com.example.simple_homes.classes.Account;
 import com.example.simple_homes.repository.account_repository.account_repository_interfaces.IAccountDatabase;
 import com.example.simple_homes.repository.account_repository.account_repository_interfaces.IAccountRepository;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-@RequiredArgsConstructor
 public class AccountJPA implements IAccountDatabase {
 
+
+    @Autowired
     IAccountRepository repo;
+
+    public AccountJPA() {}
 
     @Override
     public List<Account> loadAllAccounts() {
