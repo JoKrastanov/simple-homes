@@ -3,6 +3,7 @@ package com.example.Simple_Homes.controller;
 import com.example.Simple_Homes.classes.Account;
 import com.example.Simple_Homes.managers.AccountService.AccountServiceInterfaces.IAccountService;
 import com.example.Simple_Homes.requests.AccountCreateRequest;
+import com.example.Simple_Homes.requests.AccountDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,8 +22,8 @@ public class AccountController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("{id}")
-    public ResponseEntity<Account> getAccountPath(@PathVariable(value = "id") Long id) {
-        Account account = ACCOUNT_MANAGER.getAccount(id);
+    public ResponseEntity<AccountDTO> getAccountPath(@PathVariable(value = "id") Long id) {
+        AccountDTO account = ACCOUNT_MANAGER.getAccount(id);
 
         if (account != null) {
             return ResponseEntity.ok().body(account);
@@ -33,8 +34,8 @@ public class AccountController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping
-    public ResponseEntity<List<Account>> getAllAccounts() {
-        List<Account> accounts = ACCOUNT_MANAGER.getAccounts();
+    public ResponseEntity<List<AccountDTO>> getAllAccounts() {
+        List<AccountDTO> accounts = ACCOUNT_MANAGER.getAccounts();
         if (accounts != null) {
             return ResponseEntity.ok().body(accounts);
         } else {
@@ -69,15 +70,15 @@ public class AccountController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PutMapping("{id}")
-    public ResponseEntity<Account> updateAccount(@PathVariable("id") Long id, @RequestParam("name") String name, @RequestParam("email") String email, @RequestParam("phoneNumber") String phoneNumber, @RequestParam("password") String password) {
-        Account account = ACCOUNT_MANAGER.getAccount(id);
+    public ResponseEntity<AccountDTO> updateAccount(@PathVariable("id") Long id, @RequestParam("name") String name, @RequestParam("email") String email, @RequestParam("phoneNumber") String phoneNumber, @RequestParam("password") String password) {
+        AccountDTO account = ACCOUNT_MANAGER.getAccount(id);
         if (account == null) {
             return new ResponseEntity("Account ID is invalid", HttpStatus.NOT_FOUND);
         } else {
             account.setName(name);
             account.setEmail(email);
             account.setPhoneNumber(phoneNumber);
-            account.setPassword(password);
+            //account.setPassword(password);
 
             return ResponseEntity.noContent().build();
         }
@@ -85,9 +86,9 @@ public class AccountController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/login")
-    public ResponseEntity<Account> getLoggedInAccount(@RequestParam(value = "email") String email, @RequestParam(value = "password") String password)
+    public ResponseEntity<AccountDTO> getLoggedInAccount(@RequestParam(value = "email") String email, @RequestParam(value = "password") String password)
     {
-        Account account = ACCOUNT_MANAGER.logInAccount(email, password);
+        AccountDTO account = ACCOUNT_MANAGER.logInAccount(email, password);
 
         if (account != null) {
             return ResponseEntity.ok().body(account);

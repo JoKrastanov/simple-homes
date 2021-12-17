@@ -1,13 +1,15 @@
 package com.example.Simple_Homes.managers.AccountService;
 
-import com.example.Simple_Homes.managers.AccountService.AccountServiceInterfaces.IAccountService;
-import com.example.Simple_Homes.requests.AccountCreateRequest;
 import com.example.Simple_Homes.classes.Account;
+import com.example.Simple_Homes.managers.AccountService.AccountServiceInterfaces.IAccountService;
 import com.example.Simple_Homes.repository.AccountRepository.AccountRepositoryInterfaces.IAccountDatabase;
+import com.example.Simple_Homes.requests.AccountCreateRequest;
+import com.example.Simple_Homes.requests.AccountDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,13 +22,19 @@ public class AccountService implements IAccountService {
 
 
     @Override
-    public List<Account> getAccounts() {
-        return ACCOUNT_DATABASE.loadAllAccounts();
+    public List<AccountDTO> getAccounts() {
+        List<AccountDTO> accountDTOS = new ArrayList<>();
+        for(Account acc : ACCOUNT_DATABASE.loadAllAccounts()) {
+            accountDTOS.add(new AccountDTO(acc.getId(),acc.getName(), acc.getEmail(), acc.getPhoneNumber()));
+        }
+        return accountDTOS;
     }
 
     @Override
-    public Account getAccount(Long id) {
-        return ACCOUNT_DATABASE.loadAccount(id);
+    public AccountDTO getAccount(Long id) {
+        Account acc = ACCOUNT_DATABASE.loadAccount(id);
+        AccountDTO dto = new AccountDTO(acc.getId(),acc.getName(), acc.getEmail(), acc.getPhoneNumber());
+        return dto;
     }
 
     @Override
@@ -62,13 +70,15 @@ public class AccountService implements IAccountService {
     }
 
     @Override
-    public Account logInAccount(String email, String password) {
-        List<Account> accounts = getAccounts();
+    public AccountDTO logInAccount(String email, String password) {
+        List<Account> accounts = getAccountsForLogIn();
         for (Account account : accounts) {
             if (account.getEmail().equals(email) && passwordEncoder.matches(password, account.getPassword())) {
-                return account;
+                AccountDTO dto = new AccountDTO(account.getId(),account.getName(), account.getEmail(), account.getPhoneNumber());
+                return dto;
             }
         }
         return null;
     }
+    private List<Account> getAccountsForLogIn() {return ACCOUNT_DATABASE.loadAllAccounts();}
 }
