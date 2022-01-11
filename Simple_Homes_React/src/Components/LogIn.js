@@ -22,6 +22,7 @@ function LogIn(props) {
 
     let history = useHistory();
 
+    const [showErr, setShowErr] = useState(true);
     const [error, setError] = useState(false);
 
     const redirectToRegister = () => {
@@ -33,21 +34,20 @@ function LogIn(props) {
         let loggedUser = 0
         let email = document.getElementById("email").value;
         let password = document.getElementById("password").value
-
-        axios
-            .post(baseURL, {
-                email : email,
-                password : password
-            })
-            .then((response) => {
-                if (response.status === 200) {
-                    tokenValue = response.data.Authorization;
-                    verifyToken(tokenValue, email,password, loggedUser);
-                }
-                else {
-                    setError(true);
-                }
-            })
+            axios
+                .post(baseURL, {
+                    email : email,
+                    password : password
+                })
+                .then((response) => {
+                    console.log(response.status)
+                    if (response.status === 200) {
+                        tokenValue = response.data.Authorization;
+                        verifyToken(tokenValue, email,password, loggedUser);
+                        setShowErr(false);
+                    }
+                })
+        if(showErr) {setError(true);}
     }
 
     const verifyToken = (token, email, password, user) => {
@@ -80,11 +80,8 @@ function LogIn(props) {
 
                 <label htmlFor="psw"><b>Password</b></label>
                 <input type="password" placeholder="Enter Password" name="psw" id={"password"} required/>
-                {!error ? <></> : <p id={"login-fail"}>Incorrect username or password! Please try again.</p>}
+                {error ? <p id={"login-fail"}>Incorrect username or password! Please try again.</p> : ""}
                 <button id={"button"} onClick={logIn}>Login</button>
-                <label>
-                    <input type="checkbox" name="remember"/> Remember me
-                </label>
                     <p>Don't have an account? <a className={"register-button"} onClick={redirectToRegister} >Register here</a></p>
             </div>
         </div>

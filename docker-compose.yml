@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  frond:
+    build: ./simple_homes
+    ports: 
+      - 3000:3000
+  back:
+    build: 
+      context: ./Simple_Homes_React
+    ports:
+      - 8080:8080
+    

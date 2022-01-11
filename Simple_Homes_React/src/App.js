@@ -16,7 +16,6 @@ import Cookies from "universal-cookie/lib";
 function App() {
 
     const cookies = new Cookies();
-    let history = useHistory();
 
     const logIn = (token, user) => {
         localStorage.setItem("authToken", token)

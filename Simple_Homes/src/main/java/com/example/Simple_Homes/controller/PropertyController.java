@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.util.List;
+import java.util.logging.Filter;
 
 @Controller
 @AllArgsConstructor
@@ -81,7 +82,8 @@ public class PropertyController {
 
     @CrossOrigin("http://localhost:3000")
     @GetMapping("/filter")
-    public ResponseEntity<List<Property>> getPropertiesType(@RequestBody FilterAccountRequest request) {
+    public ResponseEntity<List<Property>> getPropertiesType(@RequestParam String type,@RequestParam String location, @RequestParam Integer aproxSize, @RequestParam Integer minPrice, @RequestParam Integer maxPrice, @RequestParam String interior) {
+        FilterAccountRequest request = new FilterAccountRequest(type, location, aproxSize, minPrice, maxPrice, interior);
         List<Property> properties = propertyManager.filterProperties(request);
         if (properties != null)
         {return ResponseEntity.ok().body(properties);}

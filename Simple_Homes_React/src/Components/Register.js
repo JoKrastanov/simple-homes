@@ -16,6 +16,7 @@ const Register = () => {
     const [phone, setPhone] = useState();
 
     const [submitted, setSubmitted] = useState(false);
+    const [showErr, setShowErr] = useState(true);
     const [error, setError] = useState(false);
 
     const handleName = (e) => {
@@ -56,7 +57,9 @@ const Register = () => {
                 .then((response) => {
                     if (response.status === 200) {
                         history.push("/LogIn");}
+                    setShowErr(false);
                 });
+            if(showErr) {setError(true)}
         }
     }
 
@@ -74,12 +77,12 @@ const Register = () => {
                     <input type="text" placeholder="Enter Phone number" name="phone" id={"phone"} value={phone} onChange={handlePhone} required/>
 
                     <label htmlFor="psw"><b>Password</b></label>
-                    <input type="password" placeholder="Enter Password" name="psw" id={"psw"} value={password} onChange={handlePassword} required/>
+                    <input type="password" placeholder="Enter Password" name="psw" id={"psw"} value={password} onChange={handlePassword} minLength={8} required/>
 
                     <label htmlFor="repPsw"><b>Repeat Password</b></label>
                     <input type="password" placeholder="Repeat Password" name="repPsw" id={"repPsw"} value={repPassword} onChange={handleRepPassword} required/>
-
-                    <button type="submit">Register</button>
+                    {!error ? <></> : <p id={"err"}>This email has already been taken!</p>}
+                    <button id={'register'} type="submit">Register</button>
                 </div>
             </form>
         </div>

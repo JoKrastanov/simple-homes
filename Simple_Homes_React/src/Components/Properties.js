@@ -5,7 +5,6 @@ import {Link} from "react-router-dom"
 import "../StyleSheets/Properties.css";
 import emailImg from "../Images/email.png";
 import PropertyContainer from "./PropertyContainer";
-
 import PropertyFilters from "./PropertyFilters";
 
 
@@ -28,9 +27,8 @@ const Properties = () => {
     if (!post) return null
         return (
             <div className={"properties"}>
-                <div className={"properties-filters"}>
-                    <PropertyFilters/>
-                </div>
+                <PropertyFilters properties={setPost}/>
+                <p id={"results"}>"{post.length}" {post.length != 1 ? "results" : "result"} found</p>
                 <Link to={"/"} id={"keep-me-updated"}><img id={"email-img"} src={emailImg}/>Keep me updated</Link>
                 <div className={"properties-containers"}>
                     {post.map(p => (

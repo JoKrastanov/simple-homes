@@ -7,6 +7,7 @@ import com.example.simple_homes.requests.AccountDTO;
 import java.util.List;
 
 public interface IAccountService {
+    Account getFullAccount(Long id);
     List<AccountDTO> getAccounts();
     AccountDTO getAccount(Long id);
     void removeAccount(Long id);

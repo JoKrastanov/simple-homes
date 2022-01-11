@@ -5,15 +5,16 @@ import com.example.simple_homes.managers.property_service.property_service_inter
 import com.example.simple_homes.repository.property_repository.property_repository_interfaces.IPropertyDatabase;
 import com.example.simple_homes.requests.FilterAccountRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 public class PropertyService implements IPropertyService {
 
+    @Autowired
     private IPropertyDatabase propertyDatabase;
 
     @Override
@@ -53,10 +54,10 @@ public class PropertyService implements IPropertyService {
         if (request.getAproxSize() > 0) {
             updateFilteredList(filteredProperties, request, 0);
         }
-        if (!request.getInteriors().isEmpty()) {
+        if (!request.getInterior().equals("")) {
             updateFilteredList(filteredProperties, request, 3);
         }
-        if (!request.getTypes().isEmpty()) {
+        if (!request.getType().equals("")) {
             updateFilteredList(filteredProperties, request,4);
         }
         return filteredProperties;
@@ -123,11 +124,11 @@ public class PropertyService implements IPropertyService {
         return properties;
     }
     private List<Property> filterInterior(List<Property> properties, FilterAccountRequest request) {
-        properties.removeIf(property -> !request.getInteriors().contains(property.getInterior()));
+        properties.removeIf(property -> !request.getInterior().contains(property.getInterior()));
         return properties;
     }
     private List<Property> filterType(List<Property> properties, FilterAccountRequest request) {
-        properties.removeIf(property -> !request.getTypes().contains(property.getType()));
+        properties.removeIf(property -> !request.getType().contains(property.getType()));
         return properties;
     }
 //endregion

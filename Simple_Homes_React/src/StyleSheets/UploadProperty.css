@@ -6,30 +6,39 @@
     margin-top: 60px;
     margin-left: auto;
     margin-right: auto;
-    width: 80%;
+    width: 60%;
     border-radius: 10px;
 }
 input {
     border-radius: 10px;
 }
-textarea {border-radius: 10px}
+textarea {
+    border-radius: 10px;
+}
+.description {
+    margin-left: -150px;
+}
 .main-info {
-    margin-top: 20px;
     display: inline-flex;
+    margin-left: 50px;
 }
 .additional {
     display: inline-flex;
-    padding: 20px;
+    width: 100%;
 }
 .additional-type {
-    margin-right: 50px;
-    border: 2px solid;
-    border-radius: 10px;
-}
-.additional-interior {
-    margin-right: 50px;
+    margin: auto;
     border: 2px solid ;
     border-radius: 10px;
+    width: 40%;
+    padding: 5px;
+}
+.additional-interior {
+    margin: 20px;
+    border: 2px solid ;
+    border-radius: 10px;
+    width: 40%;
+    padding: 5px;
 }
 .location-details {
     margin: auto;
@@ -41,7 +50,7 @@ textarea {border-radius: 10px}
 }
 .details {
     padding-right: 20px;
-    width: 200px;
+    width: 260px;
 }
 #submit-button {
     color: white;

@@ -1,27 +1,103 @@
-.PropertyFilters{
-    height: 60px;
-}
-
-#filters{display: inline-block; padding-left: 5px; padding-right: 5px; }
-
-.filter-button {
-    border-radius: 200px;
-    width: 100px;
-    background-color: darkblue;
-    color: white;
-    font-size: 18px;
-}
-.filter{padding-inline: 5px}
-
-.properties-filter-options {
-    width: 50%;
+.wrapper {
     position: absolute;
-    height: 60px;
-    background-color: rgb(40,40,40);
-    z-index: 10;
-    margin-top: -5px;
-    margin-left: 10rem;
+    display: flex;
+    width: 100%;
+    z-index: 0;
     color: white;
+    min-width: 60px;
 }
 
+#sidebar {
+    width: 350px;
+    position: fixed;
+    top: 50px;
+    left: 0;
+    height: 100vh;
+    z-index: 999;
+    background: black;
+    color: #fff;
+    transition: all 0.3s;
+}
 
+#apply-btn {
+    color: white;
+    font-size: 15px;
+    position: fixed;
+    bottom: 50px;
+    left: 25px;
+    width: 250px;
+}
+#menu-icon {
+    width: 50px;
+    height: auto;
+    margin-top: 1vh;
+    margin-right: 1vh;
+    float: right;
+}
+#menu-icon:hover {
+    background-color: grey;
+}
+
+.type {
+    padding: 10px;
+    margin-bottom: 20px;
+    width: 100%;
+    border: 1px solid white;
+    border-radius: 10px;
+}
+.interior {
+    padding: 10px;
+    margin-bottom: 20px;
+    width: 100%;
+    border: 1px solid white;
+    border-radius: 10px;
+}
+.price {
+    padding: 10px;
+    margin-bottom: 20px;
+    width: 100%;
+    border: 1px solid white;
+    border-radius: 10px;
+}
+.city {
+    padding: 10px;
+    margin-bottom: 20px;
+    width: 100%;
+    border: 1px solid white;
+    border-radius: 10px;
+    height: 80%;
+}
+#additional {
+    color: white;
+    font-size: 15px;
+    position: fixed;
+    left: 25px;
+    width: 250px;
+    display: block;
+    margin-top: 70px;
+}
+#city-lbl {
+    margin-bottom: 0;
+    color: white;
+    font-size: 15px;
+}
+#cities {
+    font-size: 20px;
+    margin: 10px;
+}
+#min-price {
+    margin-right: 20px;
+}
+.price label {margin-right: 5px;}
+
+.size {
+    padding: 10px;
+    margin-bottom: 20px;
+    width: 100%;
+    border: 1px solid white;
+    border-radius: 10px;
+    height: 80%;
+}
+#size-number {
+    text-align: center;
+}

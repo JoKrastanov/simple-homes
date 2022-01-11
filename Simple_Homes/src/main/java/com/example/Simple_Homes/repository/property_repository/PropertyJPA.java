@@ -4,14 +4,15 @@ import com.example.simple_homes.classes.Property;
 import com.example.simple_homes.repository.property_repository.property_repository_interfaces.IPropertyDatabase;
 import com.example.simple_homes.repository.property_repository.property_repository_interfaces.IPropertyRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-@RequiredArgsConstructor
 public class PropertyJPA implements IPropertyDatabase {
 
+    @Autowired
     IPropertyRepository repo;
 
     @Override

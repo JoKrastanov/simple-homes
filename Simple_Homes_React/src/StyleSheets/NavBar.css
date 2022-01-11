@@ -22,7 +22,6 @@
     overflow: hidden;
     background-color: #0E0B16;
     font-size: 20px;
-
     position: -webkit-sticky;
     position: sticky;
     top: 0;
@@ -40,6 +39,7 @@
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
+    border-radius: 10px;
 }
 
 .NavBar-items li a:hover {

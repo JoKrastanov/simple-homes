@@ -23,6 +23,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/properties/search/**").permitAll()
                 .antMatchers("/properties/filter/**").permitAll()
                 .antMatchers("/properties/**").permitAll()
+                .antMatchers("/properties/").permitAll()
                 .antMatchers("/h2-ui/*").permitAll()
                 .antMatchers("/h2-ui").permitAll()
                 //.antMatchers("/**").permitAll()

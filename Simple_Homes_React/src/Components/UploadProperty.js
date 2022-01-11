@@ -125,10 +125,8 @@ function UploadProperty(props) {
                             <input value={rooms} onChange={handleRooms} type="text" pattern="[0-9]*" placeholder="Rooms" name="rooms" id="rooms" required/>
                         </div>
                     </div>
-
                     <div className={"description"}>
-                    <textarea value={description} onChange={handleDescription} id="description" name="description" rows="20" cols="80" placeholder={"Provide a description"}>
-
+                    <textarea value={description} onChange={handleDescription} id="description" name="description" rows="20" cols="150" placeholder={"Provide a description"}>
                     </textarea>
                     </div>
                 </div>

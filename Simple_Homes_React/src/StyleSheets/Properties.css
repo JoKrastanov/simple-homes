@@ -28,5 +28,9 @@ body {overflow-x: hidden;}
     margin-top: 10px;
     margin-left: 50%;
 }
-
+#results {
+    margin-top: 10px;
+    margin-bottom: 0px;
+    font-size: 25px;
+}
 #keep-me-updated:hover {background-color: #1087ff}

@@ -38,6 +38,9 @@ public class AccountService implements IAccountService {
     }
 
     @Override
+    public Account getFullAccount(Long id) {return accountDatabase.loadAccount(id);}
+
+    @Override
     public void removeAccount(Long id) {
         accountDatabase.deleteAccount(id);
     }
@@ -80,4 +83,5 @@ public class AccountService implements IAccountService {
         return null;
     }
     private List<Account> getAccountsForLogIn() {return accountDatabase.loadAllAccounts();}
+
 }
