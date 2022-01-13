@@ -94,7 +94,7 @@ public class PropertyController {
     @GetMapping("/search/{location}")
     public ResponseEntity<List<Property>> searchPropertiesByLocation(@PathVariable String location) {
         List<Property> properties = propertyManager.searchPropertiesByLocation(location);
-        if (properties != null)
+        if (!properties.isEmpty())
         {return ResponseEntity.ok().body(properties);}
         else {return ResponseEntity.notFound().build();}
     }
