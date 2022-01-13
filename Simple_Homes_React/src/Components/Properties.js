@@ -29,7 +29,6 @@ const Properties = () => {
             <div className={"properties"}>
                 <PropertyFilters properties={setPost}/>
                 <p id={"results"}>"{post.length}" {post.length != 1 ? "results" : "result"} found</p>
-                <Link to={"/"} id={"keep-me-updated"}><img id={"email-img"} src={emailImg}/>Keep me updated</Link>
                 <div className={"properties-containers"}>
                     {post.map(p => (
                         <PropertyContainer key={p.id} p={p}/>
