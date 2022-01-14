@@ -8,7 +8,7 @@ const SearchResults = (props) => {
     return (
         <div>
             {props.array.map(p => (
-                <div>
+                <div className={"properties-containers"}>
                     <PropertyContainer key={p.id} p={p}/>
                 </div>
             ))}

@@ -1,5 +1,9 @@
 package com.example.simple_homes.IntegrationTests;
 
+import com.example.simple_homes.classes.Account;
+import com.example.simple_homes.managers.account_service.AccountService;
+import com.example.simple_homes.repository.account_repository.AccountJPA;
+import com.example.simple_homes.requests.AccountCreateRequest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -21,6 +25,7 @@ public class AccountControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
+
 
     @Test
     public void TestCreateAccount() throws Exception {
